@@ -116,7 +116,6 @@
 .how-title p{font-size:15px;color:rgba(247,249,234,.8);font-weight:300;line-height:1.6;max-width:400px}
 .how-steps{display:flex;gap:0}
 .hw-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 24px;position:relative;text-align:center;min-width:105px}
-.hw-step+.hw-step::before{content:"→";position:absolute;left:0;top:20px;font-size:18px;color:rgba(201,234,90,.7);transform:translateX(-50%)}
 .hw-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.28);display:grid;place-items:center;backdrop-filter:blur(6px)}
 .hw-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
 .hw-lbl{font-size:13px;font-weight:500;color:#fff;line-height:1.3}
@@ -144,7 +143,6 @@
  .why-grid{grid-template-columns:1fr}
  .how-card{padding:28px 24px}
  .filter-row{gap:8px}
- .hw-step+.hw-step::before{display:none}
 }
 </style>
 </head>
@@ -181,7 +179,7 @@
 <div class="filter-row">
  <div class="search-box">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-  <input type="search" id="pkg-search" placeholder="Search packages — e.g. Full Body, Senior, Diabetes, Heart…" aria-label="Search health packages">
+  <input type="search" id="pkg-search" placeholder="Search packages — e.g. Full Body, Senior, Diabetes, Heart&hellip;" aria-label="Search health packages">
  </div>
  <div class="filter-tabs" role="navigation" aria-label="Package categories">
   <a href="#" class="ft active" id="ft-all">All Packages</a>
@@ -196,7 +194,7 @@
 <!-- Promo Offer Bar -->
 <div class="promo-bar">
  <div class="promo-inner">
-  <p>🎉 Special Offer: <span>Extra ₹200 OFF</span> on any package above ₹1,200 with code <span>HEALTH200</span> at checkout.</p>
+  <p>🎉 Special Offer: <span>Extra &#8377;200 OFF</span> on any package above &#8377;1,200 with code <span>HEALTH200</span> at checkout.</p>
   <a href="404.html">Book with Offer</a>
  </div>
 </div>
@@ -251,11 +249,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹1,299</strong>
-       <del>₹2,499</del>
+       <strong>&#8377;1,299</strong>
+       <del>&#8377;2,499</del>
       </div>
-      <span class="pcard-save">Save ₹1,200 (48% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6 hrs · 10h Fasting</span>
+      <span class="pcard-save">Save &#8377;1,200 (48% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6 hrs Â· 10h Fasting</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -300,11 +298,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹2,499</strong>
-       <del>₹4,500</del>
+       <strong>&#8377;2,499</strong>
+       <del>&#8377;4,500</del>
       </div>
-      <span class="pcard-save">Save ₹2,001 (45% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports same-day · 10h Fasting</span>
+      <span class="pcard-save">Save &#8377;2,001 (45% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports same-day Â· 10h Fasting</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -349,10 +347,10 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹1,899</strong>
-       <del>₹3,600</del>
+       <strong>&#8377;1,899</strong>
+       <del>&#8377;3,600</del>
       </div>
-      <span class="pcard-save">Save ₹1,701 (47% OFF)</span>
+      <span class="pcard-save">Save &#8377;1,701 (47% OFF)</span>
       <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Free Gentle Home Collection</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
@@ -397,11 +395,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹1,699</strong>
-       <del>₹3,200</del>
+       <strong>&#8377;1,699</strong>
+       <del>&#8377;3,200</del>
       </div>
-      <span class="pcard-save">Save ₹1,501 (47% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6-8 hrs · 10h Fasting</span>
+      <span class="pcard-save">Save &#8377;1,501 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6-8 hrs Â· 10h Fasting</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -445,10 +443,10 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹1,399</strong>
-       <del>₹2,600</del>
+       <strong>&#8377;1,399</strong>
+       <del>&#8377;2,600</del>
       </div>
-      <span class="pcard-save">Save ₹1,201 (46% OFF)</span>
+      <span class="pcard-save">Save &#8377;1,201 (46% OFF)</span>
       <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Includes Fasting + PP sample visit</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
@@ -493,11 +491,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹1,799</strong>
-       <del>₹3,400</del>
+       <strong>&#8377;1,799</strong>
+       <del>&#8377;3,400</del>
       </div>
-      <span class="pcard-save">Save ₹1,601 (47% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 8 hrs · 12h Fasting</span>
+      <span class="pcard-save">Save &#8377;1,601 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 8 hrs Â· 12h Fasting</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -540,11 +538,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹799</strong>
-       <del>₹1,499</del>
+       <strong>&#8377;799</strong>
+       <del>&#8377;1,499</del>
       </div>
-      <span class="pcard-save">Save ₹700 (47% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 4-6 hrs · Fasting required</span>
+      <span class="pcard-save">Save &#8377;700 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 4-6 hrs Â· Fasting required</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -587,11 +585,11 @@
     <div class="pcard-foot">
      <div class="pcard-pricing">
       <div class="pcard-price-main">
-       <strong>₹999</strong>
-       <del>₹1,800</del>
+       <strong>&#8377;999</strong>
+       <del>&#8377;1,800</del>
       </div>
-      <span class="pcard-save">Save ₹801 (44% OFF)</span>
-      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day report · Certificate included</span>
+      <span class="pcard-save">Save &#8377;801 (44% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day report Â· Certificate included</span>
      </div>
      <a href="404.html" class="pcard-book-btn">Book Package</a>
     </div>
@@ -613,8 +611,8 @@
     <tr>
      <th>Health Check Parameter</th>
      <th>Essential<br><small>42 Tests</small></th>
-     <th class="hl-col">Full Body Basic<br><small>63 Tests · Popular</small></th>
-     <th>Full Body Advanced<br><small>85 Tests · Executive</small></th>
+     <th class="hl-col">Full Body Basic<br><small>63 Tests Â· Popular</small></th>
+     <th>Full Body Advanced<br><small>85 Tests Â· Executive</small></th>
      <th>Senior Citizen<br><small>78 Tests</small></th>
     </tr>
    </thead>
@@ -705,17 +703,17 @@
     </tr>
     <tr>
      <td><b>Price (Discounted)</b></td>
-     <td><span class="tbl-price">₹799</span></td>
-     <td class="hl-col"><span class="tbl-price" style="color:var(--green)">₹1,299</span></td>
-     <td><span class="tbl-price">₹2,499</span></td>
-     <td><span class="tbl-price">₹1,899</span></td>
+     <td><span class="tbl-price">&#8377;799</span></td>
+     <td class="hl-col"><span class="tbl-price" style="color:var(--green)">&#8377;1,299</span></td>
+     <td><span class="tbl-price">&#8377;2,499</span></td>
+     <td><span class="tbl-price">&#8377;1,899</span></td>
     </tr>
     <tr>
      <td><b>Action</b></td>
-     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹799</a></td>
-     <td class="hl-col"><a href="404.html" class="pcard-book-btn" style="padding:9px 18px;font-size:13px">Book ₹1,299</a></td>
-     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹2,499</a></td>
-     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹1,899</a></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book &#8377;799</a></td>
+     <td class="hl-col"><a href="404.html" class="pcard-book-btn" style="padding:9px 18px;font-size:13px">Book &#8377;1,299</a></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book &#8377;2,499</a></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book &#8377;1,899</a></td>
     </tr>
    </tbody>
   </table>
@@ -902,7 +900,7 @@
   <div class="sf-bot">
    <span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span>
    <span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span>
-   <a href="404.html">Back to top &uarr;</a>
+   <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top &uarr;</a>
   </div>
   <div class="sf-word" aria-hidden="true">Stackly</div>
  </div>

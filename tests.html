@@ -99,7 +99,6 @@
 .how-title p{font-size:15px;color:rgba(247,249,234,.8);font-weight:300;line-height:1.6;max-width:400px}
 .how-steps{display:flex;gap:0}
 .hw-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 28px;position:relative;text-align:center;min-width:110px}
-.hw-step+.hw-step::before{content:"→";position:absolute;left:0;top:20px;font-size:18px;color:rgba(201,234,90,.7);transform:translateX(-50%)}
 .hw-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.28);display:grid;place-items:center;backdrop-filter:blur(6px)}
 .hw-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
 .hw-lbl{font-size:13px;font-weight:500;color:#fff;line-height:1.3}
@@ -134,7 +133,7 @@
   <p class="lead">Book individual blood tests or complete body checkup packages with free home collection across Salem and same-day digital reports.</p>
   <div class="cta">
    <a href="#individual" class="btn cream">Find Your Test</a>
-   <a href="packages.html" class="btn ghost">Health Packages →</a>
+   <a href="packages.html" class="btn ghost">Health Packages &rarr;</a>
   </div>
  </div>
 </header>
@@ -143,7 +142,7 @@
 <div class="filter-row">
  <div class="search-box">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-  <input type="search" id="test-search" placeholder="Search tests — e.g. CBC, thyroid, HbA1c…" aria-label="Search tests">
+  <input type="search" id="test-search" placeholder="Search tests — e.g. CBC, thyroid, HbA1c&hellip;" aria-label="Search tests">
  </div>
  <div class="filter-tabs" role="navigation" aria-label="Test categories">
   <a href="#" class="ft active" id="ft-all">All</a>
@@ -183,7 +182,7 @@
     <p class="t-desc">A comprehensive panel measuring all major blood components. Essential for detecting infections, anaemia, and immune disorders.</p>
     <div class="t-params"><span class="t-param">RBC</span><span class="t-param">WBC</span><span class="t-param">Haemoglobin</span><span class="t-param">Platelets</span><span class="t-param">MCV</span><span class="t-param">+13 more</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹299</strong><small>Fasting not needed</small></div>
+     <div class="t-price"><strong>&#8377;299</strong><small>Fasting not needed</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>4–6 hours</div>
       <a href="404.html" class="t-book">Book</a>
@@ -203,7 +202,7 @@
     <p class="t-desc">Measures all cholesterol fractions to assess cardiovascular risk. Requires 12-hour fasting before the sample.</p>
     <div class="t-params"><span class="t-param">Total Cholesterol</span><span class="t-param">HDL</span><span class="t-param">LDL</span><span class="t-param">VLDL</span><span class="t-param">Triglycerides</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹349</strong><small>12-hour fast required</small></div>
+     <div class="t-price"><strong>&#8377;349</strong><small>12-hour fast required</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -223,7 +222,7 @@
     <p class="t-desc">Checks TSH, T3, and T4 levels to detect hypothyroidism, hyperthyroidism, and thyroid nodules. No fasting required.</p>
     <div class="t-params"><span class="t-param">TSH</span><span class="t-param">Free T3</span><span class="t-param">Free T4</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹449</strong><small>Fasting not needed</small></div>
+     <div class="t-price"><strong>&#8377;449</strong><small>Fasting not needed</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -243,7 +242,7 @@
     <p class="t-desc">Reflects average blood sugar levels over the past 3 months. The gold standard test for diagnosing and monitoring diabetes.</p>
     <div class="t-params"><span class="t-param">HbA1c %</span><span class="t-param">eAG (estimated avg glucose)</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹399</strong><small>Fasting not needed</small></div>
+     <div class="t-price"><strong>&#8377;399</strong><small>Fasting not needed</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -263,7 +262,7 @@
     <p class="t-desc">A panel of enzymes and proteins that assesses liver health. Important for anyone on long-term medication, or with jaundice symptoms.</p>
     <div class="t-params"><span class="t-param">ALT / SGPT</span><span class="t-param">AST / SGOT</span><span class="t-param">Bilirubin</span><span class="t-param">Albumin</span><span class="t-param">+4 more</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹549</strong><small>8-hour fast preferred</small></div>
+     <div class="t-price"><strong>&#8377;549</strong><small>8-hour fast preferred</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -283,7 +282,7 @@
     <p class="t-desc">Deficiency affects bone density, immunity, and mood. A single blood draw measures your current Vitamin D status accurately.</p>
     <div class="t-params"><span class="t-param">25-OH Vitamin D3</span><span class="t-param">Deficiency grading</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹649</strong><small>Fasting not needed</small></div>
+     <div class="t-price"><strong>&#8377;649</strong><small>Fasting not needed</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -303,7 +302,7 @@
     <p class="t-desc">Evaluates kidney health by measuring waste products and electrolytes in your blood. Recommended annually for hypertension and diabetes patients.</p>
     <div class="t-params"><span class="t-param">Creatinine</span><span class="t-param">BUN</span><span class="t-param">Uric Acid</span><span class="t-param">eGFR</span><span class="t-param">Electrolytes</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹449</strong><small>8-hour fast preferred</small></div>
+     <div class="t-price"><strong>&#8377;449</strong><small>8-hour fast preferred</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -323,7 +322,7 @@
     <p class="t-desc">Diagnoses iron deficiency anaemia and iron overload. Key for women, children, and those experiencing chronic fatigue.</p>
     <div class="t-params"><span class="t-param">Serum Iron</span><span class="t-param">TIBC</span><span class="t-param">Ferritin</span><span class="t-param">Transferrin Saturation</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹499</strong><small>8-hour fast required</small></div>
+     <div class="t-price"><strong>&#8377;499</strong><small>8-hour fast required</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -343,7 +342,7 @@
     <p class="t-desc">Evaluates reproductive hormones to assess menstrual irregularities, PCOS, fertility concerns, and menopause transitions.</p>
     <div class="t-params"><span class="t-param">FSH</span><span class="t-param">LH</span><span class="t-param">Estradiol</span><span class="t-param">Prolactin</span><span class="t-param">AMH</span></div>
     <div class="t-foot">
-     <div class="t-price"><strong>₹999</strong><small>Day 2–5 of cycle preferred</small></div>
+     <div class="t-price"><strong>&#8377;999</strong><small>Day 2–5 of cycle preferred</small></div>
      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
       <div class="t-time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Next day</div>
       <a href="404.html" class="t-book">Book</a>
@@ -373,7 +372,7 @@
     <div class="pkg-name">Full Body Basic</div>
     <div class="pkg-tests"><span class="pkg-t">CBC</span><span class="pkg-t">Lipid Profile</span><span class="pkg-t">Liver (LFT)</span><span class="pkg-t">Kidney (KFT)</span><span class="pkg-t">Thyroid (TSH)</span><span class="pkg-t">Blood Sugar</span><span class="pkg-t">Urine Routine</span><span class="pkg-t">+20 more</span></div>
     <div class="pkg-foot">
-     <div class="pkg-price"><strong>₹1,299</strong><span>Save ₹700 vs individual</span></div>
+     <div class="pkg-price"><strong>&#8377;1,299</strong><span>Save &#8377;700 vs individual</span></div>
      <span class="pkg-book">Book Package</span>
     </div>
    </div>
@@ -389,7 +388,7 @@
     <div class="pkg-name">Full Body Advanced</div>
     <div class="pkg-tests"><span class="pkg-t">Everything in Basic</span><span class="pkg-t">Vitamin D &amp; B12</span><span class="pkg-t">HbA1c</span><span class="pkg-t">Iron Studies</span><span class="pkg-t">Hormone Panel</span><span class="pkg-t">Chest X-Ray</span><span class="pkg-t">+35 more</span></div>
     <div class="pkg-foot">
-     <div class="pkg-price"><strong>₹2,499</strong><span>Save ₹1,800 vs individual</span></div>
+     <div class="pkg-price"><strong>&#8377;2,499</strong><span>Save &#8377;1,800 vs individual</span></div>
      <span class="pkg-book">Book Package</span>
     </div>
    </div>
@@ -405,7 +404,7 @@
     <div class="pkg-name">Diabetes Care Panel</div>
     <div class="pkg-tests"><span class="pkg-t">Fasting Blood Sugar</span><span class="pkg-t">PP Sugar</span><span class="pkg-t">HbA1c</span><span class="pkg-t">Insulin</span><span class="pkg-t">Kidney (KFT)</span><span class="pkg-t">Urine Micro-albumin</span><span class="pkg-t">+8 more</span></div>
     <div class="pkg-foot">
-     <div class="pkg-price"><strong>₹1,099</strong><span>Save ₹600 vs individual</span></div>
+     <div class="pkg-price"><strong>&#8377;1,099</strong><span>Save &#8377;600 vs individual</span></div>
      <span class="pkg-book">Book Package</span>
     </div>
    </div>
@@ -421,7 +420,7 @@
     <div class="pkg-name">Women's Wellness Panel</div>
     <div class="pkg-tests"><span class="pkg-t">CBC</span><span class="pkg-t">Iron + Ferritin</span><span class="pkg-t">Thyroid</span><span class="pkg-t">Hormone Panel</span><span class="pkg-t">Vitamin D &amp; B12</span><span class="pkg-t">Calcium</span><span class="pkg-t">+14 more</span></div>
     <div class="pkg-foot">
-     <div class="pkg-price"><strong>₹1,599</strong><span>Save ₹900 vs individual</span></div>
+     <div class="pkg-price"><strong>&#8377;1,599</strong><span>Save &#8377;900 vs individual</span></div>
      <span class="pkg-book">Book Package</span>
     </div>
    </div>
@@ -494,7 +493,7 @@
 <div><h4>Visit and call</h4><ul><li>Stackly Diagnostics, Omalur Main Road, Salem, Tamil Nadu 636007</li><li><a href="404.html">+91 98765 43210</a></li><li><a href="404.html">info@stackly.in</a></li><li><a href="404.html">Chat on WhatsApp</a></li></ul></div>
 <div class="sf-hrs"><h4>Opening hours</h4><ul><li>Mon-Sat <b>6:30 AM - 8 PM</b></li><li>Sunday <b>7 AM - 1 PM</b></li><li>Home visits <b>Daily</b></li></ul></div>
 </div>
-<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="404.html">Back to top &uarr;</a></div>
+<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top &uarr;</a></div>
 <div class="sf-word" aria-hidden="true">Stackly</div>
 </div></footer>
 

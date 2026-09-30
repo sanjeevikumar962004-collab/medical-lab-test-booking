@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -25,11 +25,10 @@
 .bs-avatars{display:flex;gap:-6px;margin-bottom:4px}
 .bs-av{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.5);overflow:hidden;margin-right:-8px;flex-shrink:0}
 .bs-av img{width:100%;height:100%;object-fit:cover;display:block}
-@media(max-width:520px){.blog-stats{max-width:100%;margin:28px 20px 0}.bs-item{min-width:50%}.bs-item:nth-child(3){min-width:100%}.bs-item:nth-child(3)::before{display:none}}
 
 /* Category filter pills */
 .cat-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:44px 20px 12px;max-width:880px;margin:0 auto}
-.cat-btn{display:inline-block;padding:9px 20px;border-radius:999px;font:500 14px 'Inter',sans-serif;cursor:pointer;border:1.5px solid #d5e0da;background:var(--card);color:var(--ink);transition:all .2s;text-decoration:none}
+.cat-btn{display:inline-block;padding:9px 20px;border-radius:999px;font:500 14px 'Inter',sans-serif;cursor:pointer;border:1.5px solid #d5e0da;background:var(--card);color:var(--ink);transition:all .2s;text-decoration:none;white-space:nowrap}
 .cat-btn:hover,.cat-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
 
 /* Featured article */
@@ -110,9 +109,145 @@
 .pag a.pg-arr{font-size:18px;color:var(--muted)}
 .pag a.pg-arr:hover{color:#fff}
 
-/* Responsive */
-@media(max-width:960px){.feat-card{grid-template-columns:1fr}.feat-img{min-height:280px}.blog-grid{grid-template-columns:1fr 1fr}.tip-card{grid-template-columns:1fr}.tip-img{min-height:200px}.nl-card{padding:36px 28px}}
-@media(max-width:640px){.blog-grid{grid-template-columns:1fr}.feat-body{padding:28px 24px}.nl-card{gap:24px}}
+/* Responsive Styles for Mobile & Tablet Breakpoints */
+@media(max-width:1024px){
+  .featured, .blog-section, .blog-tip, .blog-nl{padding:0 24px}
+  .blog-grid{gap:20px}
+}
+
+@media(max-width:960px){
+  .feat-card{grid-template-columns:1fr;border-radius:24px;min-height:auto}
+  .feat-img{min-height:280px;height:300px}
+  .feat-body{padding:36px 32px;gap:16px}
+  .blog-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .tip-card{grid-template-columns:1fr;border-radius:24px;min-height:auto}
+  .tip-img{min-height:220px;height:240px}
+  .tip-body{padding:36px 32px}
+  .nl-card{padding:40px 36px;border-radius:24px}
+  .cat-bar{padding:32px 20px 10px;gap:8px}
+}
+
+@media(max-width:768px){
+  .blog-hero{padding:110px 0 50px}
+  .hero.ab{padding:110px 0 45px}
+  .blog-section{margin-top:45px}
+  .blog-tip{margin:45px auto}
+  .blog-nl{margin:20px auto 60px}
+  .nl-card{flex-direction:column;align-items:stretch;gap:24px;text-align:center}
+  .nl-body h3 br{display:none}
+  .nl-body p{margin:0 auto}
+  .nl-form-wrap{flex:1 1 100%;width:100%;max-width:480px;margin:0 auto}
+}
+
+@media(max-width:640px){
+  .blog-hero{padding:100px 0 40px}
+  .hero.ab{padding:100px 0 35px;border-radius:22px;margin:8px 6px}
+  .hero h1{font-size:clamp(26px,6.5vw,38px);margin:18px 0 16px}
+  .hero h1 br{display:none}
+  .hero .lead{font-size:15px;line-height:1.55;margin-bottom:24px;padding:0 8px}
+  .hero .cta{gap:10px}
+  
+  .cat-bar{padding:22px 14px 8px;gap:6px;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
+  .cat-bar::-webkit-scrollbar{display:none}
+  .cat-btn{padding:7px 16px;font-size:13px;white-space:nowrap;flex-shrink:0}
+  
+  .featured, .blog-section, .blog-tip, .blog-nl{padding:0 14px}
+  .featured{margin-top:10px}
+  
+  .feat-card{border-radius:20px}
+  .feat-img{min-height:220px;height:220px}
+  .feat-body{padding:24px 20px;gap:14px}
+  .feat-title{font-size:20px;line-height:1.25}
+  .feat-excerpt{font-size:14px;line-height:1.55}
+  .feat-meta{gap:12px}
+  .feat-av{width:34px;height:34px}
+  
+  .blog-section{margin-top:36px}
+  .blog-header{margin-bottom:20px;gap:10px}
+  .blog-header h2{font-size:22px}
+  .sort-select{padding:7px 14px;font-size:13px}
+  .blog-grid{grid-template-columns:1fr;gap:18px}
+  
+  .b-card{border-radius:20px}
+  .b-body{padding:20px 18px 22px;gap:10px}
+  .b-title{font-size:17px}
+  .b-excerpt{font-size:13.5px}
+  
+  .blog-tip{margin:36px auto}
+  .tip-card{border-radius:20px}
+  .tip-img{min-height:180px;height:190px}
+  .tip-body{padding:24px 20px;gap:12px}
+  .tip-title{font-size:20px}
+  .tip-text{font-size:14px}
+  
+  .blog-nl{margin:16px auto 50px}
+  .nl-card{padding:30px 20px;border-radius:20px}
+  .nl-body h3{font-size:22px}
+  
+  .pag{padding:8px 0 45px;gap:6px}
+  .pag a{width:38px;height:38px;font-size:13.5px}
+  
+  .banner{padding:48px 20px;margin:0 8px;border-radius:22px;text-align:center;min-height:auto}
+  .banner h2{font-size:clamp(24px,5.5vw,36px);margin-bottom:22px;max-width:100%}
+  .banner .chips{position:static;margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+}
+
+@media(max-width:480px){
+  .hero.ab{padding:90px 0 30px;margin:6px 4px;border-radius:18px}
+  .hero h1{font-size:25px;letter-spacing:-.02em}
+  .badge{font-size:11.5px;padding:3px 12px 3px 3px}
+  .badge b{padding:4px 9px;font-size:11.5px}
+  .cta .btn{padding:11px 18px;font-size:13.5px;width:100%;text-align:center}
+  
+  .featured, .blog-section, .blog-tip, .blog-nl{padding:0 10px}
+  
+  .feat-card{border-radius:16px}
+  .feat-img{min-height:180px;height:180px}
+  .feat-body{padding:18px 14px;gap:12px}
+  .feat-badge{font-size:11px;padding:4px 11px}
+  .feat-title{font-size:18px}
+  .feat-excerpt{font-size:13.5px}
+  .read-link{width:100%;justify-content:center;padding:10px 16px}
+  
+  .blog-header{flex-direction:row;align-items:center;justify-content:space-between}
+  .blog-header h2{font-size:20px}
+  
+  .b-card{border-radius:16px}
+  .b-body{padding:16px 14px 18px}
+  .b-title{font-size:16px}
+  .b-excerpt{font-size:13px}
+  .b-foot{flex-wrap:wrap;gap:8px}
+  
+  .tip-card{border-radius:16px}
+  .tip-img{min-height:160px;height:160px}
+  .tip-body{padding:18px 14px}
+  .tip-title{font-size:18px}
+  .tip-body .btn{width:100%;text-align:center}
+  
+  .nl-card{padding:24px 16px;border-radius:16px}
+  .nl-body h3{font-size:20px}
+  .nl-body p{font-size:13px}
+  .nl-row{flex-direction:column;background:transparent;border:none;padding:0;gap:8px}
+  .nl-row input{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:12px 16px;width:100%;text-align:center}
+  .nl-row .btn{width:100%;padding:12px;border-radius:999px}
+  
+  .banner{padding:36px 16px;border-radius:18px}
+  .banner h2{font-size:22px}
+  .banner .btn{width:100%;text-align:center}
+  
+  .pag a{width:34px;height:34px;font-size:12.5px}
+}
+
+@media(max-width:360px){
+  .hero h1{font-size:22px}
+  .feat-title{font-size:16.5px}
+  .b-title{font-size:15px}
+  .tip-title{font-size:16.5px}
+  .nl-body h3{font-size:18px}
+  .cat-btn{padding:6px 12px;font-size:12px}
+  .pag{gap:4px}
+  .pag a{width:30px;height:30px;font-size:12px}
+}
 </style>
 </head>
 <body class="blog-page">
@@ -156,13 +291,13 @@
    <img src="images/photo-1582719471384-894fbb16e074.webp" sizes="(max-width:960px) 100vw, 55vw" alt="Blood test sample tubes in diagnostic rack" loading="eager" decoding="async">
   </div>
   <div class="feat-body">
-   <span class="feat-badge">Featured · Blood Tests</span>
+   <span class="feat-badge">Featured Â· Blood Tests</span>
    <h2 class="feat-title">Understanding Your CBC Report: What Do the Numbers Actually Mean?</h2>
    <p class="feat-excerpt">A Complete Blood Count (CBC) is one of the most common tests ordered by doctors — yet most patients receive their report and have no idea what RBC, WBC, or MCV actually mean. We break it all down in plain language.</p>
    <div class="feat-meta">
     <div class="feat-av"><img src="images/p1.webp" alt="Dr. Anitha Rajan" loading="lazy"></div>
     <div>
-     <span class="feat-by">Dr. Anitha Rajan<span>Chief Pathologist · 8 min read</span></span>
+     <span class="feat-by">Dr. Anitha Rajan<span>Chief Pathologist Â· 8 min read</span></span>
     </div>
    </div>
    <span class="read-link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
@@ -414,7 +549,7 @@
  <a href="#" class="active" aria-current="page">1</a>
  <a href="#">2</a>
  <a href="#">3</a>
- <a href="#" style="pointer-events:none;opacity:.4">…</a>
+ <a href="#" style="pointer-events:none;opacity:.4">&hellip;</a>
  <a href="#">8</a>
  <a href="404.html" class="pg-arr" aria-label="Next page">&#8594;</a>
 </div>
@@ -468,7 +603,7 @@
 <div><h4>Visit and call</h4><ul><li>Stackly Diagnostics, Omalur Main Road, Salem, Tamil Nadu 636007</li><li><a href="404.html">+91 98765 43210</a></li><li><a href="404.html">info@stackly.in</a></li><li><a href="404.html">Chat on WhatsApp</a></li></ul></div>
 <div class="sf-hrs"><h4>Opening hours</h4><ul><li>Mon-Sat <b>6:30 AM - 8 PM</b></li><li>Sunday <b>7 AM - 1 PM</b></li><li>Home visits <b>Daily</b></li></ul></div>
 </div>
-<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="404.html">Back to top &uarr;</a></div>
+<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Back to top &uarr;</a></div>
 <div class="sf-word" aria-hidden="true">Stackly</div>
 </div></footer>
 

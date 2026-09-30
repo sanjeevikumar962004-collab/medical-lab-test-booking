@@ -54,10 +54,129 @@ admin:{
 overview:()=>{const B=D.bookings,ok=B.filter(b=>b.status!=='Cancelled'),days=[...Array(7)].map((_,i)=>day(i-4)),mx=Math.max(1,...days.map(d=>B.filter(b=>b.date===d).length));
 return `<div class="grid g4" style="margin-bottom:16px"><div class="card kpi hero"><small>Revenue</small><b>${inr(ok.reduce((s,b)=>s+T(b.testId).price,0))}</b></div><div class="card kpi"><small>Bookings</small><b>${B.length}</b></div><div class="card kpi"><small>Pending</small><b>${B.filter(b=>b.status==='Pending').length}</b></div><div class="card kpi"><small>Reports ready</small><b>${B.filter(b=>b.status==='Ready').length}</b></div></div>
 <div class="grid g2"><div class="card"><h2>Bookings, 7-day window</h2><div class="bars">${days.map(d=>{const n=B.filter(b=>b.date===d).length;return `<div><b>${n}</b><i style="height:${n/mx*100}%"></i>${d.slice(5)}</div>`}).join('')}</div></div><div class="card"><h2>Latest bookings</h2><div class="list">${B.slice(-4).reverse().map(row).join('')}</div></div></div>`},
-bookings:()=>`<div class="card"><h2>All bookings</h2><div class="tools"><input id="q" placeholder="Search patient or test" aria-label="Search"><select id="sf"><option value="">All statuses</option>${STAT.map(s=>`<option>${s}</option>`).join('')}</select></div><div class="tw"><table><thead><tr><th>Patient</th><th>Test</th><th>Date</th><th>Mode</th><th>Status</th></tr></thead><tbody id="tb"></tbody></table></div></div>`,
+bookings:()=>{
+  const B=D.bookings,tot=B.length,pend=B.filter(b=>b.status==='Pending').length,conf=B.filter(b=>b.status==='Confirmed').length,coll=B.filter(b=>b.status==='Collected').length,rdy=B.filter(b=>b.status==='Ready').length;
+  return `<div class="grid g4" style="margin-bottom:16px">
+    <div class="card kpi hero"><small>Total Bookings</small><b>${tot}</b></div>
+    <div class="card kpi"><small>Pending Confirmation</small><b style="color:#b45309">${pend}</b></div>
+    <div class="card kpi"><small>Confirmed &amp; Active</small><b style="color:#0b8442">${conf+coll}</b></div>
+    <div class="card kpi"><small>Reports Published</small><b style="color:#031b34">${rdy}</b></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+      <div>
+        <h2 style="margin-bottom:2px">All Bookings</h2>
+        <small style="color:var(--muted)">Manage, filter, and update patient test bookings</small>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="pill" style="font-size:13px;padding:6px 14px"><b id="booking-count">${tot}</b> bookings</span>
+      </div>
+    </div>
+    <div class="tools">
+      <input id="q" placeholder="Search by patient, phone or test..." aria-label="Search bookings">
+      <select id="sf" aria-label="Filter by status">
+        <option value="">All statuses (${tot})</option>
+        ${STAT.map(s=>`<option value="${s}">${s==='Ready'?'Report ready':s} (${B.filter(b=>b.status===s).length})</option>`).join('')}
+      </select>
+      <select id="mf" aria-label="Filter by collection mode">
+        <option value="">All modes</option>
+        <option value="Home">Home collection (${B.filter(b=>b.mode==='Home').length})</option>
+        <option value="Lab">Lab visit (${B.filter(b=>b.mode==='Lab').length})</option>
+      </select>
+    </div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Patient Details</th>
+            <th>Test Panel</th>
+            <th>Appointment</th>
+            <th>Mode</th>
+            <th>Status</th>
+            <th>Update Status</th>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+  </div>`;
+},
 tests:()=>`<div class="card" style="margin-bottom:16px"><h2>Add a test</h2><form class="f" data-f="test"><label>Name<input name="n" placeholder="Test name" required></label><label>Price (₹)<input type="number" name="p" min="1" required></label><label>Report time<input name="t" value="6 hrs"></label><div style="align-self:end"><button class="btn">Add test</button></div></form></div><div class="card"><h2>Test catalog</h2><div class="tw"><table><thead><tr><th>Test</th><th>Price</th><th>Report time</th><th></th></tr></thead>${D.tests.map(t=>`<tr><td><b>${esc(t.name)}</b></td><td>${inr(t.price)}</td><td>${esc(t.tat)}</td><td><button class="btn sm red" data-a="deltest" data-id="${t.id}">Remove</button></td></tr>`).join('')}</table></div></div>`,
 patients:()=>{const m={};D.bookings.forEach(b=>{(m[b.phone]=m[b.phone]||{n:b.patient,p:b.phone,c:0,l:''}).c++;m[b.phone].l=T(b.testId).name});return `<div class="card"><h2>Patients</h2><div class="tw"><table><thead><tr><th>Name</th><th>Phone</th><th>Visits</th><th>Last test</th></tr></thead>${Object.values(m).map(p=>`<tr><td><b>${esc(p.n)}</b></td><td>${esc(p.p)}</td><td>${p.c}</td><td>${esc(p.l)}</td></tr>`).join('')}</table></div></div>`},
-reports:()=>{const r=D.bookings.filter(b=>['Collected','Ready'].includes(b.status));return `<div class="card"><h2>Reports</h2><div class="list">${r.map(b=>`<div><div class="g"><b>${esc(T(b.testId).name)}</b><small>${esc(b.patient)} · ${b.date}</small></div>${pill(b.status)}${b.status==='Collected'?`<button class="btn sm" data-a="pub" data-id="${b.id}">Publish report</button>`:''}</div>`).join('')||'<p class="empty">No samples waiting. Mark a booking as Collected to see it here.</p>'}</div></div>`}}}[role];
+reports:()=>{
+  const B=D.bookings,
+        ready=B.filter(b=>b.status==='Ready'),
+        coll=B.filter(b=>b.status==='Collected'),
+        inprog=B.filter(b=>['Pending','Confirmed'].includes(b.status)),
+        tot=ready.length + coll.length;
+  return `<div class="grid g4" style="margin-bottom:16px">
+    <div class="card kpi hero"><small>Total Processed</small><b>${tot}</b></div>
+    <div class="card kpi"><small>Published &amp; Ready</small><b style="color:#0b8442">${ready.length}</b></div>
+    <div class="card kpi"><small>Awaiting Verification</small><b style="color:#7c3aed">${coll.length}</b></div>
+    <div class="card kpi"><small>Sample Pending</small><b style="color:#b45309">${inprog.length}</b></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+        <div>
+          <h2 style="margin-bottom:2px">Laboratory Reports</h2>
+          <small style="color:var(--muted)">Verify test samples and publish verified digital reports to patients</small>
+        </div>
+        <span class="pill" style="font-size:13px;padding:6px 14px"><b id="rep-count">${tot}</b> reports</span>
+      </div>
+      <div class="tools">
+        <input id="rq" placeholder="Search patient, test or date..." aria-label="Search reports">
+        <select id="rf" aria-label="Filter reports">
+          <option value="">All samples (${tot})</option>
+          <option value="Collected">Awaiting publication (${coll.length})</option>
+          <option value="Ready">Published (${ready.length})</option>
+        </select>
+      </div>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient &amp; Test</th>
+              <th>Collection Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rtb"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <h2>Quality &amp; TAT Status</h2>
+      <div class="ring" style="margin:8px 0">
+        ${ring(98, '#0b8442')}
+        <div>
+          <b>98.8%</b>
+          <p style="color:var(--muted);font-size:13px;margin-top:4px">Reports delivered within standard turnaround time (TAT).</p>
+        </div>
+      </div>
+      <div class="list">
+        <div>
+          <div class="g">
+            <b>Same-day Routine TAT</b>
+            <small>CBC, Blood Glucose, Lipid Profiles (&lt; 6 hrs)</small>
+          </div>
+          <span class="pill Ready">100% On-time</span>
+        </div>
+        <div>
+          <div class="g">
+            <b>Specialized Panels TAT</b>
+            <small>Thyroid, HbA1c, Vitamin D (&lt; 8-24 hrs)</small>
+          </div>
+          <span class="pill Ready">98% On-time</span>
+        </div>
+      </div>
+      <div class="tip" style="margin-top:auto">
+        <b>Pathologist Note:</b> Once a booking is marked as <i>Collected</i>, verify results against calibration standards before clicking <b>Publish Report</b>.
+      </div>
+    </div>
+  </div>`;
+}}}[role];
 
 const COL=['#0b8442','#c9ea5a','#052033','#4ea94c','#8fb7a5'];
 const donut=it=>{const t=it.reduce((s,x)=>s+x[1],0)||1;let o=25;return `<div class="dn"><svg viewBox="0 0 42 42" role="img"><circle cx="21" cy="21" r="15.9155" fill="none" stroke="#eef3ef" stroke-width="6"/>${it.map((x,i)=>{const p=x[1]/t*100,c=`<circle cx="21" cy="21" r="15.9155" fill="none" stroke="${COL[i%5]}" stroke-width="6" stroke-dasharray="${p} ${100-p}" stroke-dashoffset="${o}"/>`;o-=p;return c}).join('')}<text x="21" y="23" text-anchor="middle" font-size="7" font-weight="600" fill="#031b34">${t}</text></svg><ul>${it.map((x,i)=>`<li><i style="background:${COL[i%5]}"></i>${esc(x[0])}<b>${x[1]}</b></li>`).join('')}</ul></div>`};
@@ -91,12 +210,82 @@ const trk=b=>{const i={Pending:0,Confirmed:1,Collected:2,Ready:3}[b.status];retu
 Object.assign(V,{
 overview:()=>oo()+`<div class="grid g22 mt"><div class="card"><h2>Health score</h2><div class="ring">${ring(82)}<div><b>82 / 100</b><p style="color:var(--muted)">Based on your latest sample results. Cholesterol is the one area to watch.</p></div></div></div><div class="card"><h2>Reminders</h2><div class="list"><div><div class="g"><b>Yearly full body checkup</b><small>Recommended every 12 months</small></div><a class="btn sm" href="#packages">View</a></div><div><div class="g"><b>Lipid profile follow-up</b><small>Suggested 3 months after a watch result</small></div><a class="btn sm" href="#book">Book</a></div></div></div></div><div class="card mt"><h2>Quick actions</h2><div class="qa"><a href="#book">${I.plus}Book a test</a><a href="#reports">${I.doc}Get reports</a><a href="#insights">${I.chart}My insights</a><a href="#support">${I.star}Get help</a></div></div><div class="tip mt"><b>Tip of the day:</b> drink plenty of water before a blood test. It makes sampling easier and does not change most results.</div>`,
 book:()=>`<div class="grid g2">${ob()}<div class="card" id="bs"></div></div>`,
-bookings:()=>`<div class="card"><h2>My bookings</h2><div class="tools">${Object.keys(FL).map(k=>`<button class="btn sm ${k===bf?'':'ghost'}" data-a="bf" data-v="${k}">${k}</button>`).join('')}</div><div class="list">${mine().filter(FL[bf]).reverse().map(b=>`<div><div class="g"><b>${esc(T(b.testId).name)}</b><small>${b.date} · ${b.slot} · ${b.mode==='Home'?'Home collection':'Lab visit'} · ${inr(T(b.testId).price)}</small></div>${pill(b.status)}${['Pending','Confirmed'].includes(b.status)?`<button class="btn sm red" data-a="cancel" data-id="${b.id}">Cancel</button>`:''}${trk(b)}</div>`).join('')||'<p class="empty">No bookings in this view.</p>'}</div></div>`,
-reports:()=>{const m=mine(),r=m.filter(b=>b.status==='Ready'),p=m.filter(b=>['Pending','Confirmed','Collected'].includes(b.status));return `<div class="grid g3"><div class="card kpi hero"><small>Ready</small><b>${r.length}</b></div><div class="card kpi"><small>In progress</small><b>${p.length}</b></div><div class="card kpi"><small>Total reports</small><b>${m.length}</b></div></div><div class="card mt"><h2>Ready to download</h2><div class="list">${r.map(b=>`<div><div class="g"><b>${esc(T(b.testId).name)}</b><small>${b.date} · ${b.patient}</small></div>${pill('Ready')}<a href="404.html" class="btn sm" data-a="dl" data-id="${b.id}">Download</a></div>`).join('')||'<p class="empty">No reports yet. They appear here as soon as your lab confirms them.</p>'}</div></div><div class="card mt"><h2>Being processed</h2><div class="list">${p.map(b=>`<div><div class="g"><b>${esc(T(b.testId).name)}</b><small>Expected in ${esc(T(b.testId).tat)} after sampling</small></div>${pill(b.status)}${trk(b)}</div>`).join('')||'<p class="empty">Nothing in progress.</p>'}</div></div>`},
+bookings:()=>`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px"><h2 style="margin:0">My bookings</h2><span class="pill" style="font-size:13px;padding:6px 14px"><b>${mine().length}</b> total</span></div><div class="tools" style="margin-bottom:16px">${Object.keys(FL).map(k=>`<button class="btn sm ${k===bf?'':'ghost'}" data-a="bf" data-v="${k}">${k}</button>`).join('')}</div><div class="bk-list">${mine().filter(FL[bf]).slice().reverse().map(b=>{const steps=['Booked','Confirmed','Collected','Report'],si={Pending:0,Confirmed:1,Collected:2,Ready:3}[b.status]??-1;return `<div class="bk-row"><div class="bk-main"><div class="bk-info"><b>${esc(T(b.testId).name)}</b><span>${b.date} &middot; ${b.slot} &middot; ${b.mode==='Home'?'&#127968; Home collection':'&#127973; Lab visit'} &middot; &#8377;${(T(b.testId).price||0).toLocaleString('en-IN')}</span></div><div class="bk-actions">${pill(b.status)}${['Pending','Confirmed'].includes(b.status)?`<button class="btn sm red" data-a="cancel" data-id="${b.id}">Cancel</button>`:''}</div></div><div class="bk-steps">${steps.map((x,j)=>`<span class="bk-step ${j<=si?'done':''}"><i></i>${x}</span>`).join('')}</div></div>`}).join('')||'<p class="empty">No bookings in this view.</p>'}</div></div>`,
+reports:()=>{const m=mine(),r=m.filter(b=>b.status==='Ready'),p=m.filter(b=>['Pending','Confirmed','Collected'].includes(b.status));return `<div class="grid g3" style="margin-bottom:16px"><div class="card kpi hero"><small>Ready to download</small><b>${r.length}</b></div><div class="card kpi"><small>In progress</small><b>${p.length}</b></div><div class="card kpi"><small>Total tests</small><b>${m.length}</b></div></div><div class="card"><h2>Ready for download</h2><div class="bk-list">${r.map(b=>`<div class="bk-row"><div class="bk-main"><div class="bk-info"><b>${esc(T(b.testId).name)}</b><span>${b.date} &middot; Patient: ${esc(b.patient)} &middot; &#8377;${(T(b.testId).price||0).toLocaleString('en-IN')}</span></div><div class="bk-actions">${pill('Ready')}<a href="404.html" class="btn sm" data-a="dl" data-id="${b.id}">Download PDF</a></div></div></div>`).join('')||'<p class="empty">No reports ready for download yet. They will appear here once ready.</p>'}</div></div><div class="card mt"><h2>Currently processing</h2><div class="bk-list">${p.map(b=>{const steps=['Booked','Confirmed','Collected','Report'],si={Pending:0,Confirmed:1,Collected:2,Ready:3}[b.status]??-1;return `<div class="bk-row"><div class="bk-main"><div class="bk-info"><b>${esc(T(b.testId).name)}</b><span>${b.date} &middot; Patient: ${esc(b.patient)} &middot; Expected in ${esc(T(b.testId).tat)}</span></div><div class="bk-actions">${pill(b.status)}</div></div><div class="bk-steps">${steps.map((x,j)=>`<span class="bk-step ${j<=si?'done':''}"><i></i>${x}</span>`).join('')}</div></div>`}).join('')||'<p class="empty">No tests currently in progress.</p>'}</div></div>`},
 insights:()=>oi()+`<div class="grid g22 mt"><div class="card"><h2>Score by area</h2>${hb([['Blood',90],['Sugar',85],['Lipids',68],['Thyroid',88]],x=>x+'/100')}</div><div class="card"><h2>Suggestions</h2><div class="list"><div><div class="g"><b>Cut back on fried food</b><small>Helps bring cholesterol into range</small></div></div><div><div class="g"><b>Walk 30 minutes daily</b><small>Supports glucose and heart health</small></div></div><div><div class="g"><b>Retest in 3 months</b><small>Book a lipid profile to track progress</small></div></div></div></div></div><p class="tip mt">These values are sample data. Real results appear here once your reports are ready. Always discuss results with your doctor.</p>`,
 support:()=>os()+`<div class="grid g22 mt"><div class="card"><h2>Send us a message</h2><form class="f" data-f="tix"><label class="w">Subject<select name="s"><option>Booking help</option><option>Report question</option><option>Billing</option><option>Other</option></select></label><label class="w">Message<input name="m" required placeholder="How can we help?"></label><div class="w"><button class="btn">Send message</button></div></form></div><div class="card"><h2>Your messages</h2><div class="list">${D.tickets.slice().reverse().map(t=>`<div><div class="g"><b>${esc(t.s)}</b><small>${esc(t.m)} · ${t.d}</small></div><span class="pill Confirmed">Sent</span></div>`).join('')||'<p class="empty">No messages yet.</p>'}</div></div></div>`,
 profile:()=>{const p=D.profile,o=(a,v)=>a.map(x=>`<option${x===v?' selected':''}>${x}</option>`).join('');return `<div class="card"><h2>Personal details</h2><form class="f" data-f="profile"><label>Full name<input name="n" value="${esc(p.name)}" placeholder="Full name (letters only)" required></label><label>Phone<input name="p" value="${esc(p.phone)}" required></label><label>Email<input type="email" name="e" value="${esc(p.email)}" required></label><label>Date of birth<input type="date" name="b" value="${esc(p.dob||'')}"></label><label>Gender<select name="g">${o(['','Female','Male','Other'],p.gender)}</select></label><label>Blood group<select name="bg">${o(['','A+','A-','B+','B-','O+','O-','AB+','AB-'],p.blood)}</select></label><label class="w">Home address (for collection)<input name="a" value="${esc(p.addr||'')}" placeholder="Street, area, Salem"></label><div class="w"><button class="btn">Save changes</button></div></form></div><div class="grid g22 mt"><div class="card"><h2>Notifications</h2>${[['sms','SMS updates'],['email','Email reports'],['wa','WhatsApp alerts']].map(k=>`<label class="chk"><input type="checkbox" data-a="pref" data-k="${k[0]}"${D.prefs[k[0]]?' checked':''}>${k[1]}</label>`).join('')}</div><div class="card"><h2>Family members</h2><div class="list">${D.family.map((f,i)=>`<div><div class="g"><b>${esc(f.n)}</b><small>${esc(f.r)}</small></div><button class="btn sm red" data-a="delfam" data-id="${i}">Remove</button></div>`).join('')||'<p class="empty">Add family to book tests for them.</p>'}</div><form class="f mt" data-f="fam"><label>Name<input name="n" placeholder="Member name (letters only)" required></label><label>Relation<input name="r" placeholder="Relation (e.g. Spouse)" required></label><div class="w"><button class="btn ghost">Add member</button></div></form></div></div>`}})}
-function tbl(){const q=($('#q').value||'').toLowerCase(),s=$('#sf').value;$('#tb').innerHTML=D.bookings.filter(b=>(!s||b.status===s)&&(b.patient+T(b.testId).name).toLowerCase().includes(q)).reverse().map(b=>`<tr><td><b>${esc(b.patient)}</b><small style="display:block;color:var(--muted)">${esc(b.phone)}</small></td><td>${esc(T(b.testId).name)}</td><td>${b.date}<br><small>${b.slot}</small></td><td>${b.mode}</td><td><select data-a="st" data-id="${b.id}">${STAT.map(x=>`<option value="${x}"${x===b.status?' selected':''}>${x==='Ready'?'Report ready':x}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="5" class="empty">No bookings match.</td></tr>'}
+
+function tbl(){
+  const q=($('#q')?$('#q').value||'':'').toLowerCase(),
+        s=($('#sf')?$('#sf').value||'':''),
+        m=($('#mf')?$('#mf').value||'':'');
+  const filtered = D.bookings.filter(b=>{
+    const matchS = (!s || b.status === s);
+    const matchM = (!m || b.mode === m);
+    const matchQ = (!q || (b.patient + ' ' + (b.phone||'') + ' ' + T(b.testId).name).toLowerCase().includes(q));
+    return matchS && matchM && matchQ;
+  });
+  const cntEl = $('#booking-count');
+  if(cntEl) cntEl.textContent = filtered.length;
+  
+  const tb = $('#tb');
+  if(!tb) return;
+  tb.innerHTML = filtered.slice().reverse().map(b=>`<tr>
+    <td>
+      <b style="color:var(--ink);font-size:14px;display:block">${esc(b.patient)}</b>
+      <small style="color:var(--muted);display:block;font-size:12px">${esc(b.phone||'N/A')}</small>
+    </td>
+    <td>
+      <b>${esc(T(b.testId).name)}</b>
+      <small style="display:block;color:var(--green);font-weight:600">${inr(T(b.testId).price)}</small>
+    </td>
+    <td>
+      <span>${b.date}</span><br>
+      <small style="color:var(--muted)">${b.slot}</small>
+    </td>
+    <td>
+      <span class="pill ${b.mode==='Home'?'Confirmed':'ghost'}">${b.mode==='Home'?'🏠 Home Collection':'🏥 Lab Visit'}</span>
+    </td>
+    <td>${pill(b.status)}</td>
+    <td>
+      <select data-a="st" data-id="${b.id}" style="padding:6px 10px;border-radius:10px;font-size:13px;border-color:var(--line);background:#fafcfb">
+        ${STAT.map(x=>`<option value="${x}"${x===b.status?' selected':''}>${x==='Ready'?'Report ready':x}</option>`).join('')}
+      </select>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="6" class="empty">No bookings found matching your search or filters.</td></tr>';
+}
+
+function rtbl(){
+  const q=($('#rq')?$('#rq').value||'':'').toLowerCase(),
+        s=($('#rf')?$('#rf').value||'':'');
+  const pool = D.bookings.filter(b=>['Collected','Ready'].includes(b.status));
+  const filtered = pool.filter(b=>{
+    const matchS = (!s || b.status === s);
+    const matchQ = (!q || (b.patient + ' ' + (b.phone||'') + ' ' + T(b.testId).name + ' ' + b.date).toLowerCase().includes(q));
+    return matchS && matchQ;
+  });
+  const cntEl = $('#rep-count');
+  if(cntEl) cntEl.textContent = filtered.length;
+  
+  const rtb = $('#rtb');
+  if(!rtb) return;
+  rtb.innerHTML = filtered.slice().reverse().map(b=>`<tr>
+    <td>
+      <b style="color:var(--ink);font-size:14px;display:block">${esc(T(b.testId).name)}</b>
+      <small style="color:var(--muted);display:block;font-size:12px">${esc(b.patient)} · ${esc(b.phone||'')}</small>
+    </td>
+    <td>
+      <span>${b.date}</span><br>
+      <small style="color:var(--muted)">${b.slot} · ${b.mode==='Home'?'Home':'Lab'}</small>
+    </td>
+    <td>${pill(b.status)}</td>
+    <td>
+      ${b.status==='Collected'?`<button class="btn sm" data-a="pub" data-id="${b.id}" style="font-size:12.5px;padding:6px 14px">Publish report</button>`:`<span style="font-size:12px;color:var(--green);font-weight:600">✓ Published</span>`}
+    </td>
+  </tr>`).join('') || '<tr><td colspan="4" class="empty">No reports match the criteria.</td></tr>';
+}
+
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on'),2200)}
 
 function validateDashField(inp){
@@ -179,8 +368,31 @@ function updateMe(){
   const curE=getStoredEmail(),curN=isA?'Admin':(D.profile.name||getStoredName()),init=(curN&&curN[0])?curN[0].toUpperCase():(isA?'A':'P');
   const meEl=$('.me');
   if(meEl){
-    meEl.innerHTML=`<i>${isA?'A':esc(init)}</i><div class="me-txt" style="line-height:1.2;text-align:left"><b style="display:block;font-size:13.5px;color:var(--ink)">${esc(curN)}</b><small style="font-size:11px;color:var(--muted);font-weight:400;display:block">${esc(curE)}</small></div>`;
+    meEl.innerHTML=`<i>${isA?'A':esc(init)}</i><div class="me-txt"><b style="display:block;font-size:13.5px;color:var(--ink)">${esc(curN)}</b><small style="font-size:11px;color:var(--muted);font-weight:400;display:block">${esc(curE)}</small></div>`;
   }
+}
+
+function renderAside(){
+  const curE=getStoredEmail(),curN=isA?'Admin':(D.profile.name||getStoredName()),init=(curN&&curN[0])?curN[0].toUpperCase():(isA?'A':'P');
+  const aside=$('aside');
+  if(!aside) return;
+  aside.innerHTML=`<a class="logo" href="index.html" aria-label="Stackly Home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+<div class="aside-user-card">
+  <i>${isA?'A':esc(init)}</i>
+  <div class="aside-user-details">
+    <strong class="aside-user-name">${esc(curN)}</strong>
+    <span class="aside-user-email">${esc(curE)}</span>
+    <span class="aside-user-badge">${isA?'Staff Admin':'Patient Account'}</span>
+  </div>
+</div>
+<nav>${NAV.map(n=>`<a href="#${n[0]}" data-k="${n[0]}">${n[2]}${n[1]}</a>`).join('')}</nav>
+<div class="sw">
+  <div class="sw-role">
+    <b>${esc(curN)}</b>
+    <small>${isA?'Admin console':'Patient portal'}</small>
+  </div>
+  <a href="login.html" class="signout-link">Sign out</a>
+</div>`;
 }
 
 function go(){
@@ -189,7 +401,17 @@ function go(){
   $('#view').innerHTML=V[n[0]]();
   document.querySelectorAll('aside nav a').forEach(a=>a.classList.toggle('on',a.dataset.k===n[0]));
   document.body.classList.remove('nav');
-  if(n[0]==='bookings'&&isA){tbl();$('#q').oninput=tbl;$('#sf').onchange=tbl}
+  if(n[0]==='bookings'&&isA){
+    tbl();
+    if($('#q')) $('#q').oninput=tbl;
+    if($('#sf')) $('#sf').onchange=tbl;
+    if($('#mf')) $('#mf').onchange=tbl;
+  }
+  if(n[0]==='reports'&&isA){
+    rtbl();
+    if($('#rq')) $('#rq').oninput=rtbl;
+    if($('#rf')) $('#rf').onchange=rtbl;
+  }
   if(D.pick&&$('[name=t]')){$('[name=t]').value=D.pick;D.pick=0}
   bs();
   updateMe();
@@ -197,16 +419,39 @@ function go(){
   scrollTo(0,0);
 }
 
-$('aside').innerHTML=`<a class="logo" href="index.html"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a><div class="role">${isA?'Admin console':'Patient portal'}</div><nav>${NAV.map(n=>`<a href="#${n[0]}" data-k="${n[0]}">${n[2]}${n[1]}</a>`).join('')}</nav><div class="sw">${isA?'Viewing as staff.':'Viewing as patient.'}<br><a href="${isA?'user-dashboard.html':'admin-dashboard.html'}">Switch to ${isA?'patient':'admin'} view</a><br><a href="login.html" style="display:inline-block;margin-top:8px;color:#d9534f;font-weight:600">Sign out</a></div>`;
+renderAside();
 $('.burger').onclick=()=>document.body.classList.toggle('nav');
 addEventListener('hashchange',go);
-document.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(!a||a.tagName==='SELECT')return;const id=+a.dataset.id,b=D.bookings.find(x=>x.id===id);
-if(a.dataset.a==='pkg'){D.pick=id;save();location.hash='book';return}if(a.dataset.a==='restock'){const k=D.stock.find(x=>x.id===id);k.q=k.m;toast(k.n+' restocked')}if(a.dataset.a==='bf'){bf=a.dataset.v;go();return}if(a.dataset.a==='delfam'){D.family.splice(id,1);toast('Removed')}if(a.dataset.a==='cancel'){b.status='Cancelled';toast('Booking cancelled')}
-if(a.dataset.a==='pub'){b.status='Ready';toast('Report published to patient')}
-if(a.dataset.a==='deltest'){D.tests=D.tests.filter(t=>t.id!==id);toast('Test removed')}
-if(a.dataset.a==='dl'){window.location.href='404.html';return}
-save();go()});
-document.addEventListener('change',e=>{if(e.target.name==='t')bs();if(e.target.dataset.a==='pref'){D.prefs[e.target.dataset.k]=e.target.checked?1:0;save();toast('Preference saved')}if(e.target.dataset.a==='st'){D.bookings.find(x=>x.id==e.target.dataset.id).status=e.target.value;save();toast('Status updated')}});
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-a]');
+  if(!a||a.tagName==='SELECT')return;
+  const id=+a.dataset.id,b=D.bookings.find(x=>x.id===id);
+  if(a.dataset.a==='pkg'){D.pick=id;save();location.hash='book';return}
+  if(a.dataset.a==='restock'){const k=D.stock.find(x=>x.id===id);k.q=k.m;toast(k.n+' restocked')}
+  if(a.dataset.a==='bf'){bf=a.dataset.v;go();return}
+  if(a.dataset.a==='delfam'){D.family.splice(id,1);toast('Removed')}
+  if(a.dataset.a==='cancel'){b.status='Cancelled';toast('Booking cancelled')}
+  if(a.dataset.a==='pub'){b.status='Ready';toast('Report published to patient')}
+  if(a.dataset.a==='deltest'){D.tests=D.tests.filter(t=>t.id!==id);toast('Test removed')}
+  if(a.dataset.a==='dl'){window.location.href='404.html';return}
+  save();go();
+});
+document.addEventListener('change',e=>{
+  if(e.target.name==='t')bs();
+  if(e.target.dataset.a==='pref'){D.prefs[e.target.dataset.k]=e.target.checked?1:0;save();toast('Preference saved')}
+  if(e.target.dataset.a==='st'){
+    const bk = D.bookings.find(x=>x.id==e.target.dataset.id);
+    if(bk){
+      bk.status=e.target.value;
+      save();
+      toast('Status updated to ' + (e.target.value === 'Ready' ? 'Report ready' : e.target.value));
+      const k = location.hash.slice(1)||'overview';
+      if(k==='bookings'&&isA) tbl();
+      else if(k==='reports'&&isA) rtbl();
+      else go();
+    }
+  }
+});
 document.addEventListener('submit',e=>{
   const f=e.target;
   if(!f||!f.classList.contains('f'))return;
@@ -214,7 +459,7 @@ document.addEventListener('submit',e=>{
   if(!validateDashForm(f))return;
   const v=Object.fromEntries(new FormData(f)),k=f.dataset.f;
   if(k==='book'){D.bookings.push({id:Date.now(),patient:me(),phone:D.profile.phone,testId:+v.t,date:v.d,slot:v.s,mode:v.m,status:'Pending'});save();toast('Booking received');location.hash='bookings';return}
-  if(k==='profile'){Object.assign(D.profile,{name:v.n.trim(),phone:v.p.trim(),email:v.e.trim(),dob:v.b||'',gender:v.g||'',blood:v.bg||'',addr:v.a||''});save();updateMe();toast('Profile saved');return}
+  if(k==='profile'){Object.assign(D.profile,{name:v.n.trim(),phone:v.p.trim(),email:v.e.trim(),dob:v.b||'',gender:v.g||'',blood:v.bg||'',addr:v.a||''});save();renderAside();updateMe();toast('Profile saved');return}
   if(k==='staff'){D.staff.push({n:v.n.trim(),r:v.r.trim(),d:v.d.trim(),s:'On duty'});toast('Team member added')}
   if(k==='fam'){D.family.push({n:v.n.trim(),r:v.r.trim()});toast('Family member added')}
   if(k==='tix'){D.tickets.push({s:v.s,m:v.m.trim(),d:day(0)});toast('Message sent to Stackly')}
