@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Health Packages &amp; Full Body Checkups | Stackly Diagnostics, Salem</title>
+<meta name="description" content="Affordable health packages in Salem. Complete body checkups, diabetic panels, senior citizen wellness & cardiac risk assessments with free home sample collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ======= Health Packages Page Styles ======= */
+
+/* Search & Filter Row */
+.filter-row{max-width:1140px;margin:0 auto;padding:44px 20px 12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.search-box{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid #dde5e0;border-radius:999px;padding:11px 20px;transition:border-color .2s}
+.search-box:focus-within{border-color:var(--green)}
+.search-box svg{width:16px;height:16px;color:var(--muted);flex-shrink:0}
+.search-box input{flex:1;border:0;outline:0;font:400 15px 'Inter',sans-serif;background:none;color:var(--ink)}
+.search-box input::placeholder{color:var(--muted)}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.ft{display:inline-block;padding:10px 20px;border-radius:999px;font:500 14px 'Inter',sans-serif;cursor:pointer;border:1.5px solid #dde5e0;background:var(--card);color:var(--ink);transition:all .2s;text-decoration:none}
+.ft:hover,.ft.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* Promo Banner */
+.promo-bar{max-width:1140px;margin:24px auto 0;padding:0 20px}
+.promo-inner{background:linear-gradient(90deg,#eef8e6 0%,#daf0da 100%);border:1px solid #c3e8c0;border-radius:18px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.promo-inner p{font-size:14.5px;font-weight:500;color:#175d2b;margin:0}
+.promo-inner p span{color:var(--green);font-weight:700}
+.promo-inner a{display:inline-block;background:var(--green);color:#fff;font-weight:600;font-size:13px;padding:8px 18px;border-radius:999px;transition:background .2s}
+.promo-inner a:hover{background:#0a7038}
+
+/* Packages Grid */
+.packages-section{max-width:1140px;margin:48px auto 0;padding:0 20px}
+.pkg-top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.pkg-top-bar h2{font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-.02em}
+.pkg-count-badge{background:var(--chip);color:var(--muted);font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px}
+
+.pkg-list-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.pcard{background:var(--card);border:1px solid #e8eeea;border-radius:26px;overflow:hidden;box-shadow:0 8px 30px rgba(3,27,52,.06);transition:box-shadow .3s,transform .25s;display:flex;flex-direction:column}
+.pcard:hover{box-shadow:0 18px 50px rgba(3,27,52,.12);transform:translateY(-3px)}
+
+.pcard-img{position:relative;height:200px;overflow:hidden}
+.pcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.pcard:hover .pcard-img img{transform:scale(1.05)}
+.pcard-badge{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--green);font-size:11.5px;font-weight:700;padding:5px 13px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.pcard-badge.popular{background:var(--green);color:#fff}
+.pcard-badge.gold{background:#052033;color:#c9ea5a}
+.pcard-param{position:absolute;bottom:14px;left:14px;background:rgba(5,32,51,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+
+.pcard-body{padding:26px 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.pcard-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.pcard-name{font-size:clamp(19px,2.2vw,23px);font-weight:600;line-height:1.2;letter-spacing:-.015em;color:var(--ink)}
+.pcard-target{font-size:13.5px;color:var(--muted);font-weight:400;line-height:1.5}
+
+/* Organ tags */
+.organs-wrap{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.organ-pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;background:var(--chip);color:var(--ink);padding:4px 11px;border-radius:999px}
+.organ-pill::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* Accordion Test List */
+.test-toggle{background:none;border:0;color:var(--green);font:600 13px 'Inter',sans-serif;padding:6px 0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:left;transition:color .2s}
+.test-toggle:hover{color:#086131}
+.test-toggle svg{width:14px;height:14px;transition:transform .25s;stroke:currentColor;fill:none;stroke-width:2.4}
+.test-toggle.open svg{transform:rotate(180deg)}
+.test-breakdown{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;background:rgba(238,248,230,.5);border-radius:14px;padding:0 16px;font-size:12.5px;color:var(--muted);line-height:1.6}
+.test-breakdown.open{max-height:300px;padding:12px 16px;margin:6px 0 10px;border:1px solid #d8ebd4}
+.test-breakdown ul{margin:0;padding-left:18px}
+.test-breakdown li{margin-bottom:3px}
+
+/* Card Footer */
+.pcard-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf2ee;padding-top:18px;margin-top:auto;flex-wrap:wrap;gap:12px}
+.pcard-pricing{display:flex;flex-direction:column}
+.pcard-price-main{display:flex;align-items:baseline;gap:8px}
+.pcard-price-main strong{font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.pcard-price-main del{font-size:14px;color:#8e9ea9;font-weight:400}
+.pcard-save{font-size:11.5px;color:var(--green);font-weight:600}
+.pcard-meta-notes{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:2px}
+.pcard-meta-notes svg{width:12px;height:12px;stroke:var(--green);stroke-width:2.2;fill:none}
+.pcard-book-btn{background:var(--green);color:#fff;border-radius:999px;font:600 14px 'Inter',sans-serif;padding:11px 22px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.pcard-book-btn:hover{background:#086c35;transform:translateY(-1px);box-shadow:0 6px 18px rgba(11,132,66,.25)}
+
+/* Comparison Table */
+.compare-section{max-width:1140px;margin:80px auto 0;padding:0 20px}
+.compare-head{text-align:center;max-width:640px;margin:0 auto 36px}
+.compare-head h2{font-size:clamp(26px,3.2vw,36px);font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.compare-head p{font-size:16px;color:var(--muted);font-weight:300;line-height:1.6}
+
+.table-wrap{background:var(--card);border:1px solid #e8eeea;border-radius:24px;overflow-x:auto;box-shadow:0 10px 36px rgba(3,27,52,.06)}
+.compare-tbl{width:100%;border-collapse:collapse;min-width:680px;text-align:left;font-size:14px}
+.compare-tbl th,.compare-tbl td{padding:16px 20px;border-bottom:1px solid #edf2ee}
+.compare-tbl th{background:#f8faf8;font-weight:600;color:var(--ink);font-size:14px}
+.compare-tbl th:first-child{min-width:220px}
+.compare-tbl th.hl-col{background:#eef8e6;color:var(--green);border-top:3px solid var(--green)}
+.compare-tbl td.hl-col{background:rgba(238,248,230,.35)}
+.compare-tbl tr:last-child td{border-bottom:0}
+.chk-yes{color:var(--green);font-weight:700;font-size:16px}
+.chk-no{color:#a5b3be;font-size:16px}
+.tbl-price{font-size:18px;font-weight:700;color:var(--ink)}
+
+/* Why choose packages */
+.why-section{max-width:1140px;margin:80px auto 0;padding:0 20px}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{background:var(--card);border:1px solid #e8eeea;border-radius:22px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;box-shadow:0 6px 20px rgba(3,27,52,.04);transition:transform .2s}
+.why-card:hover{transform:translateY(-3px)}
+.why-icon{width:46px;height:46px;border-radius:14px;background:#eef8e6;display:grid;place-items:center;color:var(--green)}
+.why-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.2}
+.why-card h3{font-size:17px;font-weight:600;color:var(--ink);line-height:1.25}
+.why-card p{font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;margin:0}
+
+/* How It Works Steps */
+.how-section{max-width:1140px;margin:76px auto 0;padding:0 20px}
+.how-card{background:radial-gradient(circle at 6% 12%,rgba(255,255,255,.06) 0%,transparent 40%),linear-gradient(135deg,#175d4f 0%,#206d55 30%,#368d59 60%,#51aa63 85%,#60bc67 100%);border-radius:28px;padding:52px 56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;box-shadow:0 16px 45px rgba(23,93,79,.2)}
+.how-title h2{font-size:clamp(22px,2.8vw,30px);font-weight:600;color:#fff;letter-spacing:-.02em;margin-bottom:10px}
+.how-title p{font-size:15px;color:rgba(247,249,234,.8);font-weight:300;line-height:1.6;max-width:400px}
+.how-steps{display:flex;gap:0}
+.hw-step{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 24px;position:relative;text-align:center;min-width:105px}
+.hw-step+.hw-step::before{content:"→";position:absolute;left:0;top:20px;font-size:18px;color:rgba(201,234,90,.7);transform:translateX(-50%)}
+.hw-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.28);display:grid;place-items:center;backdrop-filter:blur(6px)}
+.hw-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.hw-lbl{font-size:13px;font-weight:500;color:#fff;line-height:1.3}
+.hw-sub{font-size:11px;color:rgba(201,234,90,.85);font-weight:400}
+
+/* Package FAQ */
+.pkg-faq-section{max-width:860px;margin:80px auto;padding:0 20px}
+.pkg-faq-section h2{font-size:clamp(24px,3vw,32px);font-weight:600;text-align:center;letter-spacing:-.02em;margin-bottom:32px}
+.pfaq-item{background:var(--card);border:1px solid #e8eeea;border-radius:18px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.pfaq-item.open{border-color:var(--green)}
+.pfaq-btn{width:100%;background:none;border:0;padding:20px 24px;text-align:left;font:600 16px 'Inter',sans-serif;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.pfaq-btn::after{content:"+";font-size:22px;line-height:1;color:var(--green);transition:transform .25s}
+.pfaq-item.open .pfaq-btn::after{transform:rotate(45deg)}
+.pfaq-content{max-height:0;overflow:hidden;padding:0 24px;color:var(--muted);font-size:14.5px;font-weight:300;line-height:1.65;transition:max-height .3s,padding .3s}
+.pfaq-item.open .pfaq-content{max-height:220px;padding:0 24px 20px}
+
+/* Responsive */
+@media(max-width:960px){
+ .pkg-list-grid{grid-template-columns:1fr}
+ .why-grid{grid-template-columns:1fr 1fr}
+ .how-card{grid-template-columns:1fr;gap:28px}
+ .how-steps{flex-wrap:wrap;justify-content:center}
+}
+@media(max-width:640px){
+ .why-grid{grid-template-columns:1fr}
+ .how-card{padding:28px 24px}
+ .filter-row{gap:8px}
+ .hw-step+.hw-step::before{display:none}
+}
+</style>
+</head>
+<body class="packages-page">
+
+<nav>
+ <a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+ <ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="tests.html">Tests</a></li>
+  <li><a href="packages.html" style="color:var(--green);font-weight:600">Packages</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="blog.html">Blog</a></li>
+  <li><a href="contact.html">Contact</a></li>
+ </ul>
+ <a href="login.html" class="btn dark" style="padding:12px 24px">Login</a>
+ <button class="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+</nav>
+
+<!-- Hero Banner (Clean Subpage Header) -->
+<header class="hero ab">
+ <div class="wrap in">
+  <span class="badge"><b>Packages</b>Salem Diagnostic Center</span>
+  <h1>Complete Health Packages,<br>Tailored for Every Need.</h1>
+  <p class="lead">Save up to 55% with bundled lab checkup packages. Free home sample collection anywhere in Salem, certified NABL-standard reports, and doctor reviews.</p>
+  <div class="cta">
+   <a href="#packages-list" class="btn cream">View All Packages</a>
+   <a href="#compare" class="btn ghost">Compare Packages</a>
+  </div>
+ </div>
+</header>
+
+<!-- Search & Category Filters -->
+<div class="filter-row">
+ <div class="search-box">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+  <input type="search" id="pkg-search" placeholder="Search packages — e.g. Full Body, Senior, Diabetes, Heart…" aria-label="Search health packages">
+ </div>
+ <div class="filter-tabs" role="navigation" aria-label="Package categories">
+  <a href="#" class="ft active" id="ft-all">All Packages</a>
+  <a href="#" class="ft" id="ft-fullbody">Full Body</a>
+  <a href="#" class="ft" id="ft-senior">Senior Care</a>
+  <a href="#" class="ft" id="ft-women">Women's Health</a>
+  <a href="#" class="ft" id="ft-diabetes">Diabetes &amp; Heart</a>
+  <a href="#" class="ft" id="ft-fitness">Active &amp; Fitness</a>
+ </div>
+</div>
+
+<!-- Promo Offer Bar -->
+<div class="promo-bar">
+ <div class="promo-inner">
+  <p>🎉 Special Offer: <span>Extra ₹200 OFF</span> on any package above ₹1,200 with code <span>HEALTH200</span> at checkout.</p>
+  <a href="404.html">Book with Offer</a>
+ </div>
+</div>
+
+<!-- Packages List Grid -->
+<section class="packages-section" id="packages-list">
+ <div class="pkg-top-bar">
+  <div>
+   <h2>Our Diagnostic Packages</h2>
+   <p style="color:var(--muted);font-size:14.5px;font-weight:300;margin-top:2px">Select from doctor-designed preventive checkup panels for your family</p>
+  </div>
+  <span class="pkg-count-badge" id="pkg-count">8 Packages Available</span>
+ </div>
+
+ <div class="pkg-list-grid" id="packages-container">
+
+  <!-- 1. Full Body Basic Package -->
+  <article class="pcard" data-cat="fullbody">
+   <div class="pcard-img">
+    <img src="images/photo-1631217868264-e5b90bb7e133.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Full Body Basic Package" loading="lazy" decoding="async">
+    <span class="pcard-badge popular">★ Most Popular</span>
+    <span class="pcard-param">63 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Full Body Basic Checkup</h3>
+    </div>
+    <p class="pcard-target">Ideal for annual health checkups, monitoring vital organ functions, and detecting early asymptomatic conditions.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">Complete Blood (CBC 24)</span>
+     <span class="organ-pill">Lipid Profile (8)</span>
+     <span class="organ-pill">Liver (LFT 11)</span>
+     <span class="organ-pill">Kidney (KFT 8)</span>
+     <span class="organ-pill">Thyroid (TSH)</span>
+     <span class="organ-pill">Fasting Sugar</span>
+     <span class="organ-pill">Urine Routine (10)</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 63 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Complete Hemogram:</b> RBC, WBC, Hemoglobin, Platelets, MCV, MCH, MCHC, Differential Count, ESR.</li>
+      <li><b>Lipid Profile:</b> Total Cholesterol, HDL, LDL, Triglycerides, VLDL, TC/HDL Ratio.</li>
+      <li><b>Liver Function:</b> SGOT, SGPT, Total Bilirubin, Direct Bilirubin, Alkaline Phosphatase, Protein, Albumin.</li>
+      <li><b>Kidney Function:</b> Blood Urea, Serum Creatinine, Uric Acid, BUN, eGFR.</li>
+      <li><b>Thyroid &amp; Sugar:</b> TSH Ultrasensitive, Fasting Blood Glucose.</li>
+      <li><b>Urine Examination:</b> Protein, Sugar, Pus cells, RBCs, Specific Gravity.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹1,299</strong>
+       <del>₹2,499</del>
+      </div>
+      <span class="pcard-save">Save ₹1,200 (48% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6 hrs · 10h Fasting</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 2. Full Body Advanced / Executive -->
+  <article class="pcard" data-cat="fullbody">
+   <div class="pcard-img">
+    <img src="images/c1.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Full Body Advanced Package" loading="lazy" decoding="async">
+    <span class="pcard-badge gold">Best Value</span>
+    <span class="pcard-param">85 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Full Body Advanced Executive</h3>
+    </div>
+    <p class="pcard-target">Our most complete preventive screening covering vitamins, 3-month sugar control, iron stores, and inflammatory cardiac risk markers.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">All in Basic (63)</span>
+     <span class="organ-pill">Vitamin D3 &amp; B12</span>
+     <span class="organ-pill">HbA1c (3-Month Sugar)</span>
+     <span class="organ-pill">Total Iron &amp; Ferritin</span>
+     <span class="organ-pill">Calcium &amp; Phosphorus</span>
+     <span class="organ-pill">hs-CRP Cardiac Risk</span>
+     <span class="organ-pill">Complete Thyroid (T3, T4, TSH)</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 85 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Everything in Basic Package (63 tests) PLUS:</b></li>
+      <li><b>Vitamin Panel:</b> 25-Hydroxy Vitamin D3, Active Vitamin B12 Cyanocobalamin.</li>
+      <li><b>Diabetes Glycated Control:</b> HbA1c, Average Estimated Glucose (eAG).</li>
+      <li><b>Iron Profile:</b> Serum Iron, Total Iron Binding Capacity (TIBC), Serum Ferritin, Transferrin Saturation.</li>
+      <li><b>Bone &amp; Minerals:</b> Total Calcium, Serum Phosphorus, Uric Acid.</li>
+      <li><b>Inflammatory &amp; Heart Marker:</b> High-sensitivity CRP (hs-CRP) for cardiovascular disease risk.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹2,499</strong>
+       <del>₹4,500</del>
+      </div>
+      <span class="pcard-save">Save ₹2,001 (45% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports same-day · 10h Fasting</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 3. Senior Citizen Wellness -->
+  <article class="pcard" data-cat="senior">
+   <div class="pcard-img">
+    <img src="images/photo-1576765608535-5f04d1e3f289.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Senior Citizen Wellness Package" loading="lazy" decoding="async">
+    <span class="pcard-badge">Senior Care (50+)</span>
+    <span class="pcard-param">78 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Senior Citizen Health Shield</h3>
+    </div>
+    <p class="pcard-target">Tailored for parents and seniors aged 50+. Focuses on joint health, electrolytes, kidney function, diabetes control, and heart strength.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">Electrolytes (Na, K, Cl)</span>
+     <span class="organ-pill">HbA1c &amp; Sugar</span>
+     <span class="organ-pill">Kidney Care (eGFR, BUN)</span>
+     <span class="organ-pill">Arthritis &amp; Uric Acid</span>
+     <span class="organ-pill">Bone Health &amp; Calcium</span>
+     <span class="organ-pill">Lipid &amp; Liver Screening</span>
+     <span class="organ-pill">Vitamin D3</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 78 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Electrolyte Imbalance Panel:</b> Serum Sodium, Potassium, Chloride.</li>
+      <li><b>Joints &amp; Bone Health:</b> Calcium, Phosphorus, Alkaline Phosphatase, Serum Uric Acid.</li>
+      <li><b>Senior Kidney Panel:</b> Creatinine, Blood Urea Nitrogen, Albumin/Creatinine Ratio.</li>
+      <li><b>Cardiac &amp; Diabetic:</b> Complete Lipid Profile, HbA1c, Fasting Blood Sugar.</li>
+      <li><b>Immunity &amp; Bone:</b> Vitamin D3 level assessment.</li>
+      <li><b>Complete Blood Picture &amp; Urine:</b> CBC with ESR, Urine Routine.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹1,899</strong>
+       <del>₹3,600</del>
+      </div>
+      <span class="pcard-save">Save ₹1,701 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Free Gentle Home Collection</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 4. Women's Comprehensive Wellness -->
+  <article class="pcard" data-cat="women">
+   <div class="pcard-img">
+    <img src="images/Home Collection.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Women's Wellness Package" loading="lazy" decoding="async">
+    <span class="pcard-badge">Women's Health</span>
+    <span class="pcard-param">72 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Women's Comprehensive Wellness</h3>
+    </div>
+    <p class="pcard-target">Designed for women to detect anemia, hormonal imbalances (thyroid/PCOS), bone density risk, and metabolic fatigue.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">Total Iron &amp; Ferritin</span>
+     <span class="organ-pill">Complete Thyroid (T3, T4, TSH)</span>
+     <span class="organ-pill">Vitamin D3 &amp; B12</span>
+     <span class="organ-pill">Calcium &amp; Minerals</span>
+     <span class="organ-pill">CBC with Anemia Indices</span>
+     <span class="organ-pill">Fasting Sugar &amp; Lipid</span>
+     <span class="organ-pill">Liver &amp; Kidney</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 72 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Anemia &amp; Iron Stores:</b> Serum Iron, Total Iron Binding Capacity, Ferritin, Transferrin Saturation.</li>
+      <li><b>Thyroid Profile:</b> Total T3, Total T4, Ultrasensitive TSH (detects hypo/hyperthyroidism).</li>
+      <li><b>Bone &amp; Fatigue Panel:</b> 25-OH Vitamin D3, Vitamin B12, Serum Calcium.</li>
+      <li><b>Vital Organ Screening:</b> Liver enzymes (SGOT, SGPT, Bilirubin), Kidney function (Creatinine, Urea).</li>
+      <li><b>Metabolic &amp; Lipids:</b> Blood Sugar Fasting, Complete Lipid Profile, Urine Routine.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹1,699</strong>
+       <del>₹3,200</del>
+      </div>
+      <span class="pcard-save">Save ₹1,501 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 6-8 hrs · 10h Fasting</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 5. Diabetic Care & Kidney Shield -->
+  <article class="pcard" data-cat="diabetes">
+   <div class="pcard-img">
+    <img src="images/photo-1579684385127-1ef15d508118.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Diabetic Care Package" loading="lazy" decoding="async">
+    <span class="pcard-badge">Diabetes Care</span>
+    <span class="pcard-param">55 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Diabetic Heart &amp; Kidney Shield</h3>
+    </div>
+    <p class="pcard-target">Essential for diabetic and prediabetic patients to track glucose control and screen for diabetic nephropathy and cholesterol risks.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">HbA1c &amp; Fasting Glucose</span>
+     <span class="organ-pill">Post Prandial (PP) Sugar</span>
+     <span class="organ-pill">Urine Microalbumin/Creatinine</span>
+     <span class="organ-pill">Kidney Function (KFT 8)</span>
+     <span class="organ-pill">Lipid Profile (8)</span>
+     <span class="organ-pill">Liver Enzymes</span>
+     <span class="organ-pill">CBC with Hemogram</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 55 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>3-Month Glucose Track:</b> HbA1c Glycated Hemoglobin, Estimated Average Glucose (eAG).</li>
+      <li><b>Blood Sugar:</b> Fasting Blood Sugar, Post Prandial (PPBS) Blood Sugar.</li>
+      <li><b>Early Diabetic Kidney Damage:</b> Urine Microalbumin, Spot Urine Creatinine, ACR Ratio.</li>
+      <li><b>Kidney Clearance:</b> Blood Urea Nitrogen, Serum Creatinine, Uric Acid, eGFR.</li>
+      <li><b>Cardiovascular Lipid Risk:</b> Total Cholesterol, Triglycerides, HDL, LDL, VLDL.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹1,399</strong>
+       <del>₹2,600</del>
+      </div>
+      <span class="pcard-save">Save ₹1,201 (46% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Includes Fasting + PP sample visit</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 6. Cardiac Risk Assessment -->
+  <article class="pcard" data-cat="diabetes">
+   <div class="pcard-img">
+    <img src="images/photo-1505751172876-fa1923c5c528.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Cardiac Risk Assessment Package" loading="lazy" decoding="async">
+    <span class="pcard-badge">Cardiac Health</span>
+    <span class="pcard-param">48 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Cardiac Risk Assessment Panel</h3>
+    </div>
+    <p class="pcard-target">Recommended for individuals with high blood pressure, family history of heart disease, smoking history, or stress-related lifestyles.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">hs-CRP Cardiac Risk</span>
+     <span class="organ-pill">Advanced Lipid Profile</span>
+     <span class="organ-pill">Apolipoprotein A1 &amp; B</span>
+     <span class="organ-pill">Homocysteine</span>
+     <span class="organ-pill">Electrolytes &amp; Kidney</span>
+     <span class="organ-pill">HbA1c Glucose</span>
+     <span class="organ-pill">Blood Hemogram (CBC)</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 48 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Arterial Inflammation:</b> High Sensitivity C-Reactive Protein (hs-CRP).</li>
+      <li><b>Vascular Risk:</b> Serum Homocysteine level.</li>
+      <li><b>Complete Heart Lipids:</b> Total Cholesterol, HDL, LDL, VLDL, Triglycerides, Non-HDL Cholesterol.</li>
+      <li><b>Protective &amp; Atherogenic Lipids:</b> Apolipoprotein A1, Apolipoprotein B, Apo B/A1 Ratio.</li>
+      <li><b>Kidney &amp; Salt Balance:</b> Serum Creatinine, Electrolytes (Sodium, Potassium).</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹1,799</strong>
+       <del>₹3,400</del>
+      </div>
+      <span class="pcard-save">Save ₹1,601 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 8 hrs · 12h Fasting</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 7. Essential Health Checkup -->
+  <article class="pcard" data-cat="fitness">
+   <div class="pcard-img">
+    <img src="images/photo-1579154204601-01588f351e67.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Essential Health Checkup" loading="lazy" decoding="async">
+    <span class="pcard-badge">Pocket-Friendly</span>
+    <span class="pcard-param">42 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Essential Preventive Checkup</h3>
+    </div>
+    <p class="pcard-target">A quick, affordable baseline checkup for students, young professionals, and routine general health check.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">CBC with Hemoglobin (18)</span>
+     <span class="organ-pill">Fasting Sugar</span>
+     <span class="organ-pill">Basic Lipid (5)</span>
+     <span class="organ-pill">Liver Screening (SGPT, Bilirubin)</span>
+     <span class="organ-pill">Kidney Screening (Creatinine)</span>
+     <span class="organ-pill">Urine Routine (10)</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 42 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Blood Count:</b> Complete Blood Count (CBC) with ESR &amp; Platelets.</li>
+      <li><b>Sugar &amp; Lipids:</b> Blood Sugar Fasting, Total Cholesterol, Triglycerides, HDL.</li>
+      <li><b>Liver Screen:</b> SGPT (ALT), Total Bilirubin.</li>
+      <li><b>Kidney Screen:</b> Serum Creatinine.</li>
+      <li><b>Urine Analysis:</b> Physical and chemical urine examination.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹799</strong>
+       <del>₹1,499</del>
+      </div>
+      <span class="pcard-save">Save ₹700 (47% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Reports in 4-6 hrs · Fasting required</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+  <!-- 8. Fit & Active / Pre-Employment -->
+  <article class="pcard" data-cat="fitness">
+   <div class="pcard-img">
+    <img src="images/Fit & Active Sports Panel.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Fitness & Pre-Employment Package" loading="lazy" decoding="async">
+    <span class="pcard-badge">Active &amp; Gym</span>
+    <span class="pcard-param">52 Parameters</span>
+   </div>
+   <div class="pcard-body">
+    <div class="pcard-title-row">
+     <h3 class="pcard-name">Fit &amp; Active Sports Panel</h3>
+    </div>
+    <p class="pcard-target">Designed for gym-goers, athletes, and pre-employment onboarding. Checks protein metabolism, electrolytes, blood type, and endurance markers.</p>
+    <div class="organs-wrap">
+     <span class="organ-pill">Blood Group &amp; Rh</span>
+     <span class="organ-pill">Complete CBC (24)</span>
+     <span class="organ-pill">Electrolytes &amp; Hydration</span>
+     <span class="organ-pill">Liver &amp; Kidney Profile</span>
+     <span class="organ-pill">Serum Calcium &amp; Uric Acid</span>
+     <span class="organ-pill">Lipid &amp; Blood Sugar</span>
+    </div>
+    <button class="test-toggle" aria-expanded="false">
+     <span>View all 52 included tests</span>
+     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="test-breakdown">
+     <ul>
+      <li><b>Blood Profile:</b> CBC with ESR, Blood Grouping &amp; Rh factor.</li>
+      <li><b>Protein &amp; Muscle Breakdown:</b> Serum Creatinine, Uric Acid, SGOT, SGPT.</li>
+      <li><b>Hydration &amp; Electrolytes:</b> Sodium, Potassium, Chloride.</li>
+      <li><b>Metabolic:</b> Fasting Sugar, Total Cholesterol, Triglycerides.</li>
+      <li><b>Urine Examination:</b> Urine routine check for protein and hydration.</li>
+     </ul>
+    </div>
+    <div class="pcard-foot">
+     <div class="pcard-pricing">
+      <div class="pcard-price-main">
+       <strong>₹999</strong>
+       <del>₹1,800</del>
+      </div>
+      <span class="pcard-save">Save ₹801 (44% OFF)</span>
+      <span class="pcard-meta-notes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Same day report · Certificate included</span>
+     </div>
+     <a href="404.html" class="pcard-book-btn">Book Package</a>
+    </div>
+   </div>
+  </article>
+
+ </div>
+</section>
+
+<!-- Side-by-Side Comparison Table -->
+<section class="compare-section" id="compare">
+ <div class="compare-head">
+  <h2>Side-by-Side Package Comparison</h2>
+  <p>Compare the key health profiles included across our most popular diagnostic packages to pick what's right for you.</p>
+ </div>
+ <div class="table-wrap">
+  <table class="compare-tbl">
+   <thead>
+    <tr>
+     <th>Health Check Parameter</th>
+     <th>Essential<br><small>42 Tests</small></th>
+     <th class="hl-col">Full Body Basic<br><small>63 Tests · Popular</small></th>
+     <th>Full Body Advanced<br><small>85 Tests · Executive</small></th>
+     <th>Senior Citizen<br><small>78 Tests</small></th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td><b>Complete Blood Count (CBC)</b></td>
+     <td><span class="chk-yes">✓ 18 tests</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ 24 tests</span></td>
+     <td><span class="chk-yes">✓ 24 tests</span></td>
+     <td><span class="chk-yes">✓ 24 tests</span></td>
+    </tr>
+    <tr>
+     <td><b>Blood Sugar Fasting</b></td>
+     <td><span class="chk-yes">✓</span></td>
+     <td class="hl-col"><span class="chk-yes">✓</span></td>
+     <td><span class="chk-yes">✓</span></td>
+     <td><span class="chk-yes">✓</span></td>
+    </tr>
+    <tr>
+     <td><b>HbA1c (3-Month Sugar)</b></td>
+     <td><span class="chk-no">—</span></td>
+     <td class="hl-col"><span class="chk-no">—</span></td>
+     <td><span class="chk-yes">✓</span></td>
+     <td><span class="chk-yes">✓</span></td>
+    </tr>
+    <tr>
+     <td><b>Lipid Profile (Cholesterol)</b></td>
+     <td><span class="chk-yes">✓ 5 tests</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ 8 tests</span></td>
+     <td><span class="chk-yes">✓ 8 tests</span></td>
+     <td><span class="chk-yes">✓ 8 tests</span></td>
+    </tr>
+    <tr>
+     <td><b>Liver Function Test (LFT)</b></td>
+     <td><span class="chk-yes">✓ 2 tests</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ 11 tests</span></td>
+     <td><span class="chk-yes">✓ 11 tests</span></td>
+     <td><span class="chk-yes">✓ 11 tests</span></td>
+    </tr>
+    <tr>
+     <td><b>Kidney Function Test (KFT)</b></td>
+     <td><span class="chk-yes">✓ 2 tests</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ 8 tests</span></td>
+     <td><span class="chk-yes">✓ 8 tests</span></td>
+     <td><span class="chk-yes">✓ 8 tests</span></td>
+    </tr>
+    <tr>
+     <td><b>Thyroid (TSH / T3 / T4)</b></td>
+     <td><span class="chk-no">—</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ TSH</span></td>
+     <td><span class="chk-yes">✓ T3, T4, TSH</span></td>
+     <td><span class="chk-yes">✓ TSH</span></td>
+    </tr>
+    <tr>
+     <td><b>Vitamin D3 &amp; Vitamin B12</b></td>
+     <td><span class="chk-no">—</span></td>
+     <td class="hl-col"><span class="chk-no">—</span></td>
+     <td><span class="chk-yes">✓ Both included</span></td>
+     <td><span class="chk-yes">✓ Vitamin D3</span></td>
+    </tr>
+    <tr>
+     <td><b>Iron Profile &amp; Ferritin</b></td>
+     <td><span class="chk-no">—</span></td>
+     <td class="hl-col"><span class="chk-no">—</span></td>
+     <td><span class="chk-yes">✓ 4 tests</span></td>
+     <td><span class="chk-no">—</span></td>
+    </tr>
+    <tr>
+     <td><b>Electrolytes (Na, K, Cl)</b></td>
+     <td><span class="chk-no">—</span></td>
+     <td class="hl-col"><span class="chk-no">—</span></td>
+     <td><span class="chk-yes">✓</span></td>
+     <td><span class="chk-yes">✓ 3 tests</span></td>
+    </tr>
+    <tr>
+     <td><b>Free Home Sample Collection</b></td>
+     <td><span class="chk-yes">✓ Free</span></td>
+     <td class="hl-col"><span class="chk-yes">✓ Free</span></td>
+     <td><span class="chk-yes">✓ Free</span></td>
+     <td><span class="chk-yes">✓ Free</span></td>
+    </tr>
+    <tr>
+     <td><b>Turnaround Time</b></td>
+     <td>4–6 hours</td>
+     <td class="hl-col">Same day (6h)</td>
+     <td>Same day (8h)</td>
+     <td>Same day (6h)</td>
+    </tr>
+    <tr>
+     <td><b>Price (Discounted)</b></td>
+     <td><span class="tbl-price">₹799</span></td>
+     <td class="hl-col"><span class="tbl-price" style="color:var(--green)">₹1,299</span></td>
+     <td><span class="tbl-price">₹2,499</span></td>
+     <td><span class="tbl-price">₹1,899</span></td>
+    </tr>
+    <tr>
+     <td><b>Action</b></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹799</a></td>
+     <td class="hl-col"><a href="404.html" class="pcard-book-btn" style="padding:9px 18px;font-size:13px">Book ₹1,299</a></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹2,499</a></td>
+     <td><a href="404.html" class="pcard-book-btn" style="padding:8px 16px;font-size:12.5px">Book ₹1,899</a></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</section>
+
+<!-- Why Choose Stackly Packages -->
+<section class="why-section">
+ <div class="compare-head">
+  <h2>Why Salem Trusts Stackly Health Packages</h2>
+  <p>Accurate, transparent, and clinically verified lab testing brought right to your doorstep.</p>
+ </div>
+ <div class="why-grid">
+  <div class="why-card">
+   <div class="why-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+   </div>
+   <h3>NABL-Standard Accuracy</h3>
+   <p>Fully automated analyzers with double verification by MD Pathologists before any report is finalized.</p>
+  </div>
+  <div class="why-card">
+   <div class="why-icon">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+   </div>
+   <h3>Free Home Sample Collection</h3>
+   <p>Trained, hygienic phlebotomists arrive at your home on time with cold-chain vacutainer sample kits.</p>
+  </div>
+  <div class="why-card">
+   <div class="why-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+   </div>
+   <h3>Same-Day Digital PDF</h3>
+   <p>Secure digital reports delivered directly to your WhatsApp and email within 6 to 8 hours.</p>
+  </div>
+  <div class="why-card">
+   <div class="why-icon">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+   </div>
+   <h3>Doctor Consultation Included</h3>
+   <p>Complimentary 10-minute tele-consultation with our medical officer to explain out-of-range parameters.</p>
+  </div>
+ </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section">
+ <div class="how-card">
+  <div class="how-title">
+   <h2>Booking a Health Package in Salem is Effortless</h2>
+   <p>Four quick steps from booking to receiving doctor-verified digital reports on your mobile phone.</p>
+  </div>
+  <div class="how-steps">
+   <div class="hw-step">
+    <div class="hw-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="hw-lbl">1. Pick Package</div>
+    <div class="hw-sub">Online in 60s</div>
+   </div>
+   <div class="hw-step">
+    <div class="hw-icon"><svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="hw-lbl">2. Home Visit</div>
+    <div class="hw-sub">At your time slot</div>
+   </div>
+   <div class="hw-step">
+    <div class="hw-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+    <div class="hw-lbl">3. Lab Analysis</div>
+    <div class="hw-sub">Calibrated tests</div>
+   </div>
+   <div class="hw-step">
+    <div class="hw-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="hw-lbl">4. WhatsApp PDF</div>
+    <div class="hw-sub">Within 6–8 hrs</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- Package Preparation & FAQ -->
+<section class="pkg-faq-section">
+ <h2>Package FAQs &amp; Preparation Guidelines</h2>
+
+ <div class="pfaq-item open">
+  <button class="pfaq-btn" aria-expanded="true">Do I need to fast before my health package?</button>
+  <div class="pfaq-content">
+   Yes, for most comprehensive packages (Full Body Basic, Advanced, Senior Citizen, Diabetic, and Cardiac), an overnight fasting period of 10 to 12 hours is required. You may drink plain water, but avoid tea, coffee, breakfast, or juices before your morning sample is collected.
+  </div>
+ </div>
+
+ <div class="pfaq-item">
+  <button class="pfaq-btn" aria-expanded="false">How does free home sample collection work in Salem?</button>
+  <div class="pfaq-content">
+   When you book a package, choose your preferred morning slot (starting from 6:30 AM). Our certified phlebotomist visits your doorstep with sterile, barcoded vacutainer tubes and a temperature-controlled sample carrier. The blood draw takes less than 5 minutes.
+  </div>
+ </div>
+
+ <div class="pfaq-item">
+  <button class="pfaq-btn" aria-expanded="false">Can I book one package for multiple family members?</button>
+  <div class="pfaq-content">
+   Absolutely! You can book for multiple members of your household in a single visit. We offer an additional 10% family discount when 2 or more packages are booked together. Our technician brings separate barcoded kits for each member.
+  </div>
+ </div>
+
+ <div class="pfaq-item">
+  <button class="pfaq-btn" aria-expanded="false">When and how will I receive my test reports?</button>
+  <div class="pfaq-content">
+   Reports are sent directly as password-protected PDFs to your WhatsApp number and registered email address within 6 to 8 hours of sample collection. You can also collect printed, embossed physical copies from our Omalur Main Road center anytime.
+  </div>
+ </div>
+
+ <div class="pfaq-item">
+  <button class="pfaq-btn" aria-expanded="false">Is a doctor consultation included with the package?</button>
+  <div class="pfaq-content">
+   Yes! All Full Body and Senior Citizen packages include a complimentary 10-minute tele-consultation with our clinical medical officer. They will explain your test values in simple Tamil or English and suggest next steps if any parameter is abnormal.
+  </div>
+ </div>
+</section>
+
+<!-- Bottom CTA Banner -->
+<section class="banner">
+ <h2>Better health starts with a checkup</h2>
+ <a href="404.html" class="btn cream">Book a Health Package</a>
+ <div class="helixbg"></div>
+ <div class="chips"><span class="chip">Full Body</span><span class="chip">Senior Care</span><span class="chip">Diabetic</span><span class="chip">+50 More</span></div>
+</section>
+
+<!-- Standard Footer -->
+<footer class="sf" id="contact">
+ <div class="sf-in">
+  <div class="sf-news">
+   <div>
+    <h3>Health checkup reminders<br>straight to your inbox</h3>
+    <p>Monthly package discounts, seasonal offers, and wellness tips. No spam.</p>
+   </div>
+   <form class="sf-form newsletter-form-inline">
+  <div class="sf-row"><input type="email" required placeholder="Your email address" aria-label="Email address"><button class="btn cream" type="submit" style="padding:13px 22px">Subscribe</button></div>
+  <small hidden role="status">Thanks for subscribing!</small>
+</form>
+  </div>
+  <div class="sf-grid">
+   <div class="sf-brand">
+    <a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+    <p>Accurate lab tests with free home sample collection and fast digital reports in Salem.</p>
+    <div class="soc" aria-label="Social links">
+     <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 1.2 19.9v-7H10.7V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg></a>
+     <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+     <a href="404.html" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3l-6.6 7.5L22 21h-6l-4.7-6.1L5.9 21h-3l7-8L2.4 3h6.2l4.2 5.6zm-1 16.2h1.7L7.3 4.7H5.5z"/></svg></a>
+    </div>
+   </div>
+   <div>
+    <h4>Tests &amp; Packages</h4>
+    <ul>
+     <li><a href="404.html">Individual Blood Tests</a></li>
+     <li><a href="404.html">Full Body Packages</a></li>
+     <li><a href="404.html">Senior Citizen Care</a></li>
+     <li><a href="404.html">Women's Wellness</a></li>
+    </ul>
+   </div>
+   <div>
+    <h4>Company</h4>
+    <ul>
+     <li><a href="404.html">About us</a></li>
+     <li><a href="404.html">Our clinical team</a></li>
+     <li><a href="404.html">Health Blog</a></li>
+     <li><a href="404.html">Book Home Collection</a></li>
+    </ul>
+   </div>
+   <div>
+    <h4>Visit and Call</h4>
+    <ul>
+     <li>Stackly Diagnostics, Omalur Main Road, Salem, Tamil Nadu 636007</li>
+     <li><a href="404.html">+91 98765 43210</a></li>
+     <li><a href="404.html">info@stackly.in</a></li>
+     <li><a href="404.html">Chat on WhatsApp</a></li>
+    </ul>
+   </div>
+   <div class="sf-hrs">
+    <h4>Opening hours</h4>
+    <ul>
+     <li>Mon-Sat <b>6:30 AM - 8 PM</b></li>
+     <li>Sunday <b>7 AM - 1 PM</b></li>
+     <li>Home Visits <b>Daily from 6:30 AM</b></li>
+    </ul>
+   </div>
+  </div>
+  <div class="sf-bot">
+   <span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span>
+   <span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span>
+   <a href="404.html">Back to top &uarr;</a>
+  </div>
+  <div class="sf-word" aria-hidden="true">Stackly</div>
+ </div>
+</footer>
+
+<script>
+// Mobile Hamburger
+document.querySelector(".burger").addEventListener("click", function(){
+  var nav = document.querySelector("nav");
+  var isOpen = nav.classList.toggle("open");
+  this.setAttribute("aria-expanded", isOpen);
+});
+document.querySelectorAll("nav ul a").forEach(function(a){
+  a.addEventListener("click", function(){
+    document.querySelector("nav").classList.remove("open");
+  });
+});
+
+// Category Filter Tabs
+var filterTabs = document.querySelectorAll(".ft");
+var pCards = document.querySelectorAll(".pcard");
+var pkgCount = document.getElementById("pkg-count");
+var searchInput = document.getElementById("pkg-search");
+
+function filterPackages() {
+  var activeTab = document.querySelector(".ft.active").id.replace("ft-", "");
+  var query = searchInput.value.toLowerCase().trim();
+  var count = 0;
+
+  pCards.forEach(function(card) {
+    var cat = card.getAttribute("data-cat");
+    var text = card.textContent.toLowerCase();
+    var matchTab = (activeTab === "all") || (cat === activeTab);
+    var matchQuery = !query || text.includes(query);
+
+    if (matchTab && matchQuery) {
+      card.style.display = "flex";
+      count++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  pkgCount.textContent = count + " Package" + (count === 1 ? "" : "s") + " Available";
+}
+
+filterTabs.forEach(function(tab) {
+  tab.addEventListener("click", function(e) {
+    e.preventDefault();
+    filterTabs.forEach(function(t) { t.classList.remove("active"); });
+    this.classList.add("active");
+    filterPackages();
+  });
+});
+
+searchInput.addEventListener("input", filterPackages);
+
+// Test Breakdown Accordion Toggle
+document.querySelectorAll(".test-toggle").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    var breakdown = this.nextElementSibling;
+    var isOpen = breakdown.classList.toggle("open");
+    this.classList.toggle("open", isOpen);
+    this.setAttribute("aria-expanded", isOpen);
+    var textSpan = this.querySelector("span");
+    if (isOpen) {
+      textSpan.textContent = "Hide included tests";
+    } else {
+      textSpan.textContent = textSpan.textContent.replace("Hide", "View all");
+    }
+  });
+});
+
+// FAQ Accordion
+document.querySelectorAll(".pfaq-btn").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    var item = this.parentElement;
+    var isOpen = item.classList.contains("open");
+    document.querySelectorAll(".pfaq-item").forEach(function(i) { i.classList.remove("open"); });
+    if (!isOpen) {
+      item.classList.add("open");
+    }
+  });
+});
+</script>
+<script src="validation.js"></script>
+</body>
+</html>

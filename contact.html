@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact Us | Stackly Diagnostics Salem</title>
+<meta name="description" content="Get in touch with Stackly Diagnostics in Salem. Book home sample collection, inquire about lab test packages, or visit our central lab on Omalur Main Road.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="contact-page">
+
+<nav>
+ <a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+ <ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="tests.html">Tests</a></li>
+  <li><a href="packages.html">Packages</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="blog.html">Blog</a></li>
+  <li><a href="contact.html" style="color:var(--green);font-weight:600">Contact</a></li>
+ </ul>
+ <a href="login.html" class="btn dark" style="padding:12px 24px">Login</a>
+ <button class="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+</nav>
+
+<header class="hero ab">
+ <div class="wrap in">
+  <span class="badge"><b>Contact Us</b>Stackly Diagnostics, Salem</span>
+  <h1>We're here to help with<br>all your diagnostic needs.</h1>
+  <p class="lead">Have questions about blood test packages, fasting instructions, or scheduling home sample collection in Salem? Reach out to our team anytime.</p>
+  <div class="cta">
+   <a href="tel:+919876543210" class="btn cream">Call Helpline</a>
+   <a href="https://wa.me/919876543210" class="btn ghost" target="_blank" rel="noopener">WhatsApp Us</a>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+ <section class="contact-sec">
+  
+  <!-- Quick Info Cards -->
+  <div class="contact-cards">
+   <div class="contact-card">
+    <div class="contact-icon">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <h3>Main Laboratory</h3>
+    <p>Omalur Main Road, Near New Bus Stand, Salem, Tamil Nadu 636007</p>
+    <a href="https://maps.google.com" target="_blank" rel="noopener">Get Directions &rarr;</a>
+   </div>
+
+   <div class="contact-card">
+    <div class="contact-icon">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </div>
+    <h3>Phone Support</h3>
+    <p>24/7 Phone &amp; Home Visit Booking</p>
+    <a href="tel:+919876543210">+91 98765 43210</a>
+   </div>
+
+   <div class="contact-card">
+    <div class="contact-icon">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </div>
+    <h3>Email Enquiries</h3>
+    <p>For report queries and support</p>
+    <a href="mailto:info@stackly.in">info@stackly.in</a>
+   </div>
+
+   <div class="contact-card">
+    <div class="contact-icon">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <h3>Working Hours</h3>
+    <p>Mon - Sat: 6:30 AM - 8:00 PM<br>Sunday: 7:00 AM - 1:00 PM</p>
+    <span style="font-size:13px;color:var(--green);font-weight:600">Home Collection: 6 AM - 6 PM</span>
+   </div>
+  </div>
+
+  <!-- Form + Side Info Split -->
+  <div class="contact-split">
+   <div class="contact-form-box">
+    <h2>Send Us a Message</h2>
+    <p class="sub">Fill out the form below and our diagnostic representative will contact you within 15 minutes.</p>
+    
+    <form class="c-form contact-form" id="contactPageForm">
+     <div class="fg">
+      <label for="contactName">Full Name *</label>
+      <input type="text" id="contactName" required placeholder="e.g. Ramesh Kumar">
+     </div>
+
+     <div class="fg">
+      <label for="contactPhone">Phone Number *</label>
+      <input type="tel" id="contactPhone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}">
+     </div>
+
+     <div class="fg">
+      <label for="contactEmail">Email Address</label>
+      <input type="email" id="contactEmail" placeholder="e.g. ramesh@gmail.com">
+     </div>
+
+     <div class="fg">
+      <label for="c-topic">Inquiry Type</label>
+      <select id="c-topic">
+       <option value="home-collection">Book Home Sample Collection</option>
+       <option value="test-inquiry">Individual Lab Test Enquiry</option>
+       <option value="health-package">Health Checkup Package Inquiry</option>
+       <option value="report-status">Report Status / Assistance</option>
+       <option value="other">General Feedback / Other</option>
+      </select>
+     </div>
+
+     <div class="fg full">
+      <label for="contactMessage">Your Message / Requirements</label>
+      <textarea id="contactMessage" placeholder="Tell us which tests you need or any specific instructions..."></textarea>
+     </div>
+
+     <div class="full">
+      <button type="submit" class="btn green" style="width:100%;padding:14px;border-radius:14px;font-size:16px">Send Message</button>
+     </div>
+
+     <div class="full" id="form-success" hidden style="background:#eef7f2;border:1.5px solid var(--green);color:var(--green);padding:14px 18px;border-radius:14px;font-size:14.5px;font-weight:500">
+      &check; Thank you! Your message has been sent successfully. Our team will get back to you shortly.
+     </div>
+    </form>
+   </div>
+
+   <div class="contact-side">
+    <div class="location-box">
+     <h3>Visit Our Lab</h3>
+     <p>Located on Omalur Main Road, easily accessible with ample parking space and a dedicated sample collection lounge.</p>
+     <div class="map-embed">
+      <iframe title="Stackly Diagnostics Salem Map Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62514.39868771144!2d78.11718045!3d11.66432505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf05d1516e873%3A0x8673f85800000000!2sSalem%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     </div>
+    </div>
+
+    <div class="contact-card" style="background:#f4f9f6;border-color:#d4e6db">
+     <div class="contact-icon" style="background:var(--green);color:#fff">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+     </div>
+     <h3>Need Home Sample Collection?</h3>
+     <p>We provide free home sample collection across Salem city limit for bookings over &integ;500.</p>
+     <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="btn green" style="text-align:center;padding:12px;margin-top:6px">Book via WhatsApp</a>
+    </div>
+   </div>
+  </div>
+
+  <!-- FAQ section -->
+  <div style="margin-top:80px">
+   <h2 class="big" style="text-align:center;margin-bottom:36px">Frequently Asked Questions</h2>
+   <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+    <div style="background:var(--card);border:1.5px solid #dde5e0;border-radius:20px;padding:24px 28px">
+     <h3 style="font-size:17px;font-weight:600;color:var(--ink);margin:0 0 8px">How do I book a home sample collection in Salem?</h3>
+     <p style="font-size:14.5px;color:var(--muted);margin:0;line-height:1.6">You can book directly by calling +91 98765 43210, sending us a message on WhatsApp, or filling out the contact form above. Our phlebotomist will arrive at your home at the requested time slot.</p>
+    </div>
+
+    <div style="background:var(--card);border:1.5px solid #dde5e0;border-radius:20px;padding:24px 28px">
+     <h3 style="font-size:17px;font-weight:600;color:var(--ink);margin:0 0 8px">How quickly will I receive my test reports?</h3>
+     <p style="font-size:14.5px;color:var(--muted);margin:0;line-height:1.6">Most routine blood tests (CBC, Lipid Profile, Blood Sugar, Thyroid) are reported within 6 hours. You will receive an SMS and WhatsApp alert with a secure download link for your PDF report.</p>
+    </div>
+
+    <div style="background:var(--card);border:1.5px solid #dde5e0;border-radius:20px;padding:24px 28px">
+     <h3 style="font-size:17px;font-weight:600;color:var(--ink);margin:0 0 8px">Do I need to fast before my blood test?</h3>
+     <p style="font-size:14.5px;color:var(--muted);margin:0;line-height:1.6">Fasting (8-12 hours) is required for tests like Fasting Blood Sugar, Lipid Profile, and Full Body Packages. Our team will guide you on exact instructions when confirming your appointment.</p>
+    </div>
+   </div>
+  </div>
+
+ </section>
+</main>
+
+<section class="banner">
+ <h2>Accurate testing, delivered with care</h2>
+ <a href="tests.html" class="btn cream">Explore All Tests</a>
+ <div class="helixbg"></div>
+ <div class="chips"><span class="chip">Pathology</span><span class="chip">Blood Tests</span><span class="chip">Health Packages</span><span class="chip">+30 More</span></div>
+</section>
+
+<footer class="sf">
+<div class="sf-in">
+<div class="sf-news">
+ <div><h3>Health tips and offers,<br>straight to your inbox</h3><p>Monthly checkup reminders and package discounts. No spam.</p></div>
+ <form class="sf-form newsletter-form-inline">
+  <div class="sf-row"><input type="email" required placeholder="Your email address" aria-label="Email address"><button class="btn cream" type="submit" style="padding:13px 22px">Subscribe</button></div>
+  <small hidden role="status">Thanks for subscribing!</small>
+</form>
+</div>
+<div class="sf-grid">
+ <div class="sf-brand"><a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a><p>Accurate lab tests with home sample collection and fast digital reports, right here in Salem.</p><div class="soc" aria-label="Social links">
+    <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 1.2 19.9v-7H10.7V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg></a>
+    <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+    <a href="404.html" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3l-6.6 7.5L22 21h-6l-4.7-6.1L5.9 21h-3l7-8L2.4 3h6.2l4.2 5.6zm-1 16.2h1.7L7.3 4.7H5.5z"/></svg></a>
+   </div></div>
+ <div><h4>Tests</h4><ul><li><a href="404.html">Blood Tests</a></li><li><a href="404.html">Health Packages</a></li><li><a href="404.html">Home Collection</a></li><li><a href="404.html">Wellness Packages</a></li></ul></div>
+ <div><h4>Company</h4><ul><li><a href="404.html">About us</a></li><li><a href="404.html">Blog</a></li><li><a href="404.html">Contact Us</a></li><li><a href="404.html">Packages</a></li></ul></div>
+ <div><h4>Visit and call</h4><ul><li>Stackly Diagnostics, Omalur Main Road, Salem, Tamil Nadu 636007</li><li><a href="404.html">+91 98765 43210</a></li><li><a href="404.html">info@stackly.in</a></li><li><a href="404.html">Chat on WhatsApp</a></li></ul></div>
+ <div class="sf-hrs"><h4>Opening hours</h4><ul><li>Mon-Sat <b>6:30 AM - 8 PM</b></li><li>Sunday <b>7 AM - 1 PM</b></li><li>Home visits <b>Daily</b></li></ul></div>
+</div>
+<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="404.html">Back to top &uarr;</a></div>
+<div class="sf-word" aria-hidden="true">Stackly</div>
+</div>
+</footer>
+
+<script>
+document.querySelector(".burger").addEventListener("click",function(){var n=document.querySelector("nav"),o=n.classList.toggle("open");this.setAttribute("aria-expanded",o)});
+</script>
+<script src="validation.js"></script>
+</body>
+</html>

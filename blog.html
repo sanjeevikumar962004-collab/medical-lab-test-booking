@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Health Blog | Stackly Diagnostics, Salem</title>
+<meta name="description" content="Expert health tips, lab test guides, and patient education from Stackly Diagnostics, Salem. Understand your reports and stay ahead of your health.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ========= Blog-specific styles ========= */
+.blog-hero{padding:130px 0 70px}
+.blog-hero h1{color:#fff;max-width:640px;margin:0 auto 16px}
+.blog-hero p.lead{color:rgba(247,249,234,.88);max-width:500px;margin:0 auto 32px;font-size:18px;font-weight:300;line-height:1.6}
+
+/* Hero stats strip */
+.blog-stats{display:flex;align-items:stretch;gap:0;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.22);border-radius:20px;overflow:hidden;max-width:660px;margin:40px auto 0;flex-wrap:wrap}
+.bs-item{flex:1;min-width:130px;padding:20px 24px;display:flex;flex-direction:column;gap:4px;position:relative}
+.bs-item+.bs-item::before{content:"";position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(255,255,255,.22)}
+.bs-num{font-size:28px;font-weight:700;color:#fff;line-height:1;letter-spacing:-.03em}
+.bs-lbl{font-size:12px;color:rgba(247,249,234,.78);font-weight:400;text-transform:uppercase;letter-spacing:.05em}
+.bs-sub{font-size:11px;color:rgba(201,234,90,.9);font-weight:500;margin-top:2px}
+.bs-avatars{display:flex;gap:-6px;margin-bottom:4px}
+.bs-av{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.5);overflow:hidden;margin-right:-8px;flex-shrink:0}
+.bs-av img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:520px){.blog-stats{max-width:100%;margin:28px 20px 0}.bs-item{min-width:50%}.bs-item:nth-child(3){min-width:100%}.bs-item:nth-child(3)::before{display:none}}
+
+/* Category filter pills */
+.cat-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:44px 20px 12px;max-width:880px;margin:0 auto}
+.cat-btn{display:inline-block;padding:9px 20px;border-radius:999px;font:500 14px 'Inter',sans-serif;cursor:pointer;border:1.5px solid #d5e0da;background:var(--card);color:var(--ink);transition:all .2s;text-decoration:none}
+.cat-btn:hover,.cat-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* Featured article */
+.featured{max-width:1140px;margin:20px auto 0;padding:0 20px}
+.feat-card{display:grid;grid-template-columns:1.15fr 1fr;border-radius:28px;overflow:hidden;background:var(--card);border:1px solid #e8eeea;min-height:440px;box-shadow:0 14px 40px rgba(3,27,52,.08);transition:box-shadow .3s}
+.feat-card:hover{box-shadow:0 22px 60px rgba(3,27,52,.13)}
+.feat-img{position:relative;overflow:hidden;min-height:440px}
+.feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.feat-card:hover .feat-img img{transform:scale(1.04)}
+.feat-body{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.feat-badge{display:inline-flex;align-items:center;gap:8px;background:#eef8e6;color:var(--green);font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;width:fit-content;letter-spacing:.04em;text-transform:uppercase}
+.feat-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.feat-title{font-size:clamp(22px,2.8vw,32px);font-weight:600;line-height:1.18;letter-spacing:-.02em;color:var(--ink)}
+.feat-excerpt{font-size:16px;color:var(--muted);font-weight:300;line-height:1.65}
+.feat-meta{display:flex;align-items:center;gap:18px;margin-top:4px}
+.feat-av{width:38px;height:38px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#a8d5a2,#2d8a5c);flex-shrink:0}
+.feat-av img{width:100%;height:100%;object-fit:cover;display:block}
+.feat-by{font-size:14px;font-weight:500;color:var(--ink)}
+.feat-by span{display:block;font-size:12px;font-weight:300;color:var(--muted);margin-top:1px}
+.read-link{display:inline-flex;align-items:center;gap:8px;font:600 14px 'Inter',sans-serif;color:var(--green);padding:12px 22px;border-radius:999px;border:2px solid var(--green);transition:all .22s;width:fit-content;text-decoration:none}
+.read-link:hover{background:var(--green);color:#fff;transform:translateX(2px)}
+.read-link svg{width:16px;height:16px;transition:transform .2s}
+.read-link:hover svg{transform:translateX(4px)}
+
+/* Blog grid */
+.blog-section{max-width:1140px;margin:60px auto 0;padding:0 20px}
+.blog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.blog-header h2{font-size:clamp(24px,3vw,32px);font-weight:600;letter-spacing:-.02em}
+.sort-select{border:1.5px solid #dde5e0;background:var(--card);border-radius:999px;padding:9px 18px;font:500 14px 'Inter',sans-serif;color:var(--ink);cursor:pointer;outline:none;transition:border-color .2s}
+.sort-select:focus{border-color:var(--green)}
+
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.b-card{background:var(--card);border:1px solid #e8eeea;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s,transform .25s}
+.b-card:hover{box-shadow:0 18px 48px rgba(3,27,52,.1);transform:translateY(-4px)}
+.b-thumb{position:relative;overflow:hidden;aspect-ratio:16/9}
+.b-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.b-card:hover .b-thumb img{transform:scale(1.06)}
+.b-tag{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:11px;font-weight:600;color:var(--green);padding:5px 12px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}
+.b-body{padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.b-title{font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:block;transition:color .2s}
+.b-title:hover{color:var(--green)}
+.b-excerpt{font-size:14.5px;color:var(--muted);font-weight:300;line-height:1.6;flex:1}
+.b-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf2ee;padding-top:14px;margin-top:4px}
+.b-author{display:flex;align-items:center;gap:9px}
+.b-av{width:30px;height:30px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#c9e8c2,#3d8a5a);flex-shrink:0}
+.b-av img{width:100%;height:100%;object-fit:cover;display:block}
+.b-name{font-size:13px;font-weight:500;color:var(--ink)}
+.b-date{font-size:12px;color:var(--muted);font-weight:300}
+.b-read{font-size:12px;color:var(--muted);font-weight:400}
+
+/* Side by side tip banner */
+.blog-tip{max-width:1140px;margin:60px auto;padding:0 20px}
+.tip-card{border-radius:28px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:260px;border:1px solid #e8eeea;box-shadow:0 10px 32px rgba(3,27,52,.06)}
+.tip-img{position:relative;overflow:hidden}
+.tip-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tip-body{padding:46px 50px;background:var(--card);display:flex;flex-direction:column;justify-content:center;gap:16px}
+.tip-label{font-size:12px;font-weight:600;color:var(--green);letter-spacing:.08em;text-transform:uppercase}
+.tip-title{font-size:clamp(22px,2.4vw,28px);font-weight:600;line-height:1.2;letter-spacing:-.02em;color:var(--ink)}
+.tip-text{font-size:15px;color:var(--muted);font-weight:300;line-height:1.65}
+
+/* Newsletter inline block */
+.blog-nl{max-width:1140px;margin:20px auto 80px;padding:0 20px}
+.nl-card{background:radial-gradient(circle at 14% 18%,rgba(255,255,255,.08) 0%,transparent 40%),linear-gradient(135deg,#175d4f 0%,#206d55 30%,#368d59 60%,#51aa63 85%,#60bc67 100%);border-radius:28px;padding:56px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;box-shadow:0 16px 45px rgba(23,93,79,.22)}
+.nl-body h3{font-size:clamp(22px,2.4vw,28px);font-weight:600;color:#ffffff;letter-spacing:-.02em;margin-bottom:8px}
+.nl-body p{color:rgba(247,249,234,.85);font-size:15px;font-weight:300;max-width:340px}
+.nl-form-wrap{flex:0 1 400px}
+.nl-row{display:flex;gap:8px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:6px}
+.nl-row input{flex:1;min-width:0;border:0;background:none;padding:0 16px;font:400 15px 'Inter',sans-serif;outline:none;color:#ffffff}
+.nl-row input::placeholder{color:rgba(255,255,255,.72)}
+.nl-row .btn{background:#f7f9ea;color:#052033;font-weight:600;padding:12px 22px}
+.nl-row .btn:hover{background:#ffffff}
+.nl-ok{display:none;margin:10px 0 0 16px;color:#c9ea5a;font-weight:500;font-size:14px}
+
+/* Pagination */
+.pag{display:flex;justify-content:center;gap:8px;padding:12px 0 60px}
+.pag a{width:42px;height:42px;display:grid;place-items:center;border-radius:999px;font:600 14px 'Inter',sans-serif;border:1.5px solid #dde5e0;background:var(--card);color:var(--ink);text-decoration:none;transition:all .2s}
+.pag a:hover,.pag a.active{background:var(--green);color:#fff;border-color:var(--green)}
+.pag a.pg-arr{font-size:18px;color:var(--muted)}
+.pag a.pg-arr:hover{color:#fff}
+
+/* Responsive */
+@media(max-width:960px){.feat-card{grid-template-columns:1fr}.feat-img{min-height:280px}.blog-grid{grid-template-columns:1fr 1fr}.tip-card{grid-template-columns:1fr}.tip-img{min-height:200px}.nl-card{padding:36px 28px}}
+@media(max-width:640px){.blog-grid{grid-template-columns:1fr}.feat-body{padding:28px 24px}.nl-card{gap:24px}}
+</style>
+</head>
+<body class="blog-page">
+
+<nav>
+ <a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+ <ul><li><a href="index.html">Home</a></li><li><a href="tests.html">Tests</a></li><li><a href="packages.html">Packages</a></li><li><a href="about.html">About</a></li><li><a href="blog.html" style="color:var(--green);font-weight:600">Blog</a></li><li><a href="contact.html">Contact</a></li></ul>
+ <a href="login.html" class="btn dark" style="padding:12px 24px">Login</a>
+ <button class="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+</nav>
+
+<!-- Hero -->
+<header class="hero ab">
+ <div class="wrap in">
+  <span class="badge"><b>Blog</b>Health &amp; Diagnostics Journal</span>
+  <h1>Health Insights, Lab Guides<br>&amp; Wellness Tips.</h1>
+  <p class="lead">Doctor-reviewed articles to help you understand your reports, prevent illness, and make confident health decisions for your family.</p>
+  <div class="cta">
+   <a href="#articles" class="btn cream">Read Articles</a>
+   <a href="404.html" class="btn ghost">Book a Test</a>
+  </div>
+ </div>
+</header>
+
+
+<!-- Category Filter -->
+<div class="cat-bar" role="navigation" aria-label="Blog categories">
+ <a href="#" class="cat-btn active" id="cat-all">All Articles</a>
+ <a href="#" class="cat-btn" id="cat-blood">Blood Tests</a>
+ <a href="#" class="cat-btn" id="cat-thyroid">Thyroid &amp; Hormones</a>
+ <a href="#" class="cat-btn" id="cat-diabetes">Diabetes</a>
+ <a href="#" class="cat-btn" id="cat-wellness">Wellness</a>
+ <a href="#" class="cat-btn" id="cat-guide">Patient Guides</a>
+ <a href="#" class="cat-btn" id="cat-home">Home Collection</a>
+</div>
+
+<!-- Featured Article -->
+<div class="featured" id="articles">
+ <a href="404.html" class="feat-card" aria-label="Read featured article: Understanding Your CBC Report">
+  <div class="feat-img">
+   <img src="images/photo-1582719471384-894fbb16e074.webp" sizes="(max-width:960px) 100vw, 55vw" alt="Blood test sample tubes in diagnostic rack" loading="eager" decoding="async">
+  </div>
+  <div class="feat-body">
+   <span class="feat-badge">Featured · Blood Tests</span>
+   <h2 class="feat-title">Understanding Your CBC Report: What Do the Numbers Actually Mean?</h2>
+   <p class="feat-excerpt">A Complete Blood Count (CBC) is one of the most common tests ordered by doctors — yet most patients receive their report and have no idea what RBC, WBC, or MCV actually mean. We break it all down in plain language.</p>
+   <div class="feat-meta">
+    <div class="feat-av"><img src="images/p1.webp" alt="Dr. Anitha Rajan" loading="lazy"></div>
+    <div>
+     <span class="feat-by">Dr. Anitha Rajan<span>Chief Pathologist · 8 min read</span></span>
+    </div>
+   </div>
+   <span class="read-link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+  </div>
+ </a>
+</div>
+
+<!-- Blog Grid -->
+<section class="blog-section">
+ <div class="blog-header">
+  <h2>Latest Articles</h2>
+  <select class="sort-select" aria-label="Sort articles">
+   <option>Most Recent</option>
+   <option>Most Popular</option>
+   <option>Shortest Read</option>
+  </select>
+ </div>
+ <div class="blog-grid">
+
+  <!-- Article 1 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1579684385127-1ef15d508118.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Doctor reviewing diagnostic report" loading="lazy" decoding="async">
+    <span class="b-tag">Thyroid &amp; Hormones</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">10 Signs You Should Get a Thyroid Test — Even Without a Doctor's Order</a>
+    <p class="b-excerpt">Fatigue, hair loss, unexplained weight changes — your thyroid may be the silent culprit. Here are the warning signs you shouldn't ignore.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p2.webp" alt="Dr. Vimal Kumar" loading="lazy"></div>
+      <span class="b-name">Dr. Vimal Kumar</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Sept 22, 2026</div>
+      <div class="b-read">5 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 2 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1584432810601-6c7f27d2362b.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Booking a lab test on phone" loading="lazy" decoding="async">
+    <span class="b-tag">Patient Guides</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">How to Prepare for a Fasting Blood Test: A Step-by-Step Guide</a>
+    <p class="b-excerpt">Fasting tests don't have to be stressful. Follow these simple guidelines the night before and morning of your appointment to get the most accurate results.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p3.webp" alt="Karthik Selvam" loading="lazy"></div>
+      <span class="b-name">Karthik Selvam</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Sept 18, 2026</div>
+      <div class="b-read">4 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 3 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/Home Collection.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Home sample collection visit" loading="lazy" decoding="async">
+    <span class="b-tag">Home Collection</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">Why Home Sample Collection Is Changing How India Gets Tested</a>
+    <p class="b-excerpt">No more clinic queues or rushing to a lab in the morning. We explore why doorstep collection is the future of diagnostics, especially for patients in Salem.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p1.webp" alt="Dr. Anitha Rajan" loading="lazy"></div>
+      <span class="b-name">Dr. Anitha Rajan</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Sept 14, 2026</div>
+      <div class="b-read">6 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 4 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1576091160399-112ba8d25d1d.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Digital health report on device" loading="lazy" decoding="async">
+    <span class="b-tag">Diabetes</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">Diabetes Prevention: The 5 Lab Tests That Can Catch It Years Before Diagnosis</a>
+    <p class="b-excerpt">Prediabetes affects millions silently. Knowing your HbA1c, fasting glucose, and insulin resistance values early gives you time to reverse the trend.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p2.webp" alt="Dr. Vimal Kumar" loading="lazy"></div>
+      <span class="b-name">Dr. Vimal Kumar</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Sept 9, 2026</div>
+      <div class="b-read">7 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 5 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1631217868264-e5b90bb7e133.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Full body checkup consultation" loading="lazy" decoding="async">
+    <span class="b-tag">Wellness</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">What to Expect During Your First Full Body Checkup at Stackly</a>
+    <p class="b-excerpt">A full body package can feel overwhelming the first time. We walk you through exactly what gets tested, in what order, and why each test matters for your overall health.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p1.webp" alt="Dr. Anitha Rajan" loading="lazy"></div>
+      <span class="b-name">Dr. Anitha Rajan</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Sept 3, 2026</div>
+      <div class="b-read">9 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 6 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1505751172876-fa1923c5c528.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Doctor explaining cholesterol results" loading="lazy" decoding="async">
+    <span class="b-tag">Blood Tests</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">HDL vs LDL: Understanding Your Cholesterol Numbers Without the Jargon</a>
+    <p class="b-excerpt">Your lipid profile report might look like a foreign language. We decode every value — HDL, LDL, triglycerides and VLDL — and explain what risk ranges really mean for you.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p2.webp" alt="Dr. Vimal Kumar" loading="lazy"></div>
+      <span class="b-name">Dr. Vimal Kumar</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Aug 27, 2026</div>
+      <div class="b-read">5 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+ </div>
+</section>
+
+<!-- Mid-page Tip Banner -->
+<div class="blog-tip">
+ <div class="tip-card">
+  <div class="tip-img">
+   <img src="images/photo-1588776814546-1ffcf47267a5.webp" sizes="(max-width:960px) 100vw, 50vw" alt="Phlebotomist doing sample collection" loading="lazy" decoding="async">
+  </div>
+  <div class="tip-body">
+   <span class="tip-label">🩸 Did You Know?</span>
+   <h3 class="tip-title">Early morning is the best time for most blood tests</h3>
+   <p class="tip-text">For fasting tests like glucose and lipid profiles, booking between 6:30–8:30 AM gives the most accurate results. Our home collection team starts early to fit your schedule.</p>
+   <a href="404.html" class="btn green" style="margin-top:8px;width:fit-content">Book Early Morning Slot</a>
+  </div>
+ </div>
+</div>
+
+<!-- More Articles Row -->
+<section class="blog-section" style="margin-top:0">
+ <div class="blog-header">
+  <h2>More From Our Experts</h2>
+ </div>
+ <div class="blog-grid">
+
+  <!-- Article 7 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/Wellness Packages.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Modern diagnostic lab" loading="lazy" decoding="async">
+    <span class="b-tag">Patient Guides</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">How to Read Your Lab Report Without Calling Your Doctor Every Time</a>
+    <p class="b-excerpt">Learn the difference between reference ranges, critical values, and borderline results. Plus when you genuinely need to call your physician right away.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p1.webp" alt="Dr. Anitha Rajan" loading="lazy"></div>
+      <span class="b-name">Dr. Anitha Rajan</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Aug 21, 2026</div>
+      <div class="b-read">6 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 8 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/photo-1579165466741-7f35e4755660.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Laboratory glassware and testing" loading="lazy" decoding="async">
+    <span class="b-tag">Wellness</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">Vitamin D Deficiency in India: Why 7 in 10 Adults Test Low — and What to Do</a>
+    <p class="b-excerpt">Vitamin D deficiency is a silent epidemic affecting most urban and semi-urban adults. Here's what the science says and how a simple blood test can guide your supplementation.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p2.webp" alt="Dr. Vimal Kumar" loading="lazy"></div>
+      <span class="b-name">Dr. Vimal Kumar</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Aug 15, 2026</div>
+      <div class="b-read">7 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+  <!-- Article 9 -->
+  <article class="b-card">
+   <div class="b-thumb">
+    <img src="images/Patient consultation.webp" sizes="(max-width:640px) 100vw, 33vw" alt="Patient consultation" loading="lazy" decoding="async">
+    <span class="b-tag">Patient Guides</span>
+   </div>
+   <div class="b-body">
+    <a href="404.html" class="b-title">Children's Annual Lab Tests: What Every Parent Should Know</a>
+    <p class="b-excerpt">Routine testing for children is often overlooked. We outline the essential annual panels for different age groups and why iron and haemoglobin levels matter for your child's focus and growth.</p>
+    <div class="b-foot">
+     <div class="b-author">
+      <div class="b-av"><img src="images/p3.webp" alt="Karthik Selvam" loading="lazy"></div>
+      <span class="b-name">Karthik Selvam</span>
+     </div>
+     <div style="text-align:right">
+      <div class="b-date">Aug 8, 2026</div>
+      <div class="b-read">5 min read</div>
+     </div>
+    </div>
+   </div>
+  </article>
+
+ </div>
+</section>
+
+<!-- Pagination -->
+<div class="pag" role="navigation" aria-label="Blog pagination">
+ <a href="404.html" class="pg-arr" aria-label="Previous page">&#8592;</a>
+ <a href="#" class="active" aria-current="page">1</a>
+ <a href="#">2</a>
+ <a href="#">3</a>
+ <a href="#" style="pointer-events:none;opacity:.4">…</a>
+ <a href="#">8</a>
+ <a href="404.html" class="pg-arr" aria-label="Next page">&#8594;</a>
+</div>
+
+<!-- Newsletter -->
+<div class="blog-nl">
+ <div class="nl-card">
+  <div class="nl-body">
+   <h3>Health tips straight<br>to your inbox.</h3>
+   <p>Monthly articles, checkup reminders, and lab test guidance. No spam — just clear, useful health information from our clinical team.</p>
+  </div>
+  <div class="nl-form-wrap">
+   <form class="newsletter-form-inline">
+    <div class="nl-row">
+     <input type="email" required placeholder="Your email address" aria-label="Email address">
+     <button class="btn" type="submit">Subscribe</button>
+    </div>
+    <small hidden role="status" class="nl-ok" style="color:var(--green);font-weight:600;margin-top:8px">🎉 You're in! Expect your first article soon.</small>
+   </form>
+  </div>
+ </div>
+</div>
+
+<!-- CTA Banner -->
+<section class="banner">
+ <h2>Ready to understand your health better?</h2>
+ <a href="404.html" class="btn cream">Book a Test Today</a>
+ <div class="helixbg"></div>
+ <div class="chips"><span
+  
+  
+  
+  class="chip">Blood Tests</span><span class="chip">Full Body Checkup</span><span class="chip">Home Collection</span><span class="chip">Same-day Reports</span></div>
+</section>
+
+<!-- Footer -->
+<footer class="sf" id="contact"><div class="sf-in">
+<div class="sf-news"><div><h3>More health tips,<br>straight to your inbox</h3><p>Monthly checkup reminders and package discounts. No spam.</p></div>
+<form class="sf-form newsletter-form-inline">
+  <div class="sf-row"><input type="email" required placeholder="Your email address" aria-label="Email address"><button class="btn cream" type="submit" style="padding:13px 22px">Subscribe</button></div>
+  <small hidden role="status">Thanks for subscribing!</small>
+</form></div>
+<div class="sf-grid">
+<div class="sf-brand"><a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a><p>Accurate lab tests with home sample collection and fast digital reports, right here in Salem.</p><div class="soc" aria-label="Social links">
+   <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 1.2 19.9v-7H10.7V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg></a>
+   <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+   <a href="404.html" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3l-6.6 7.5L22 21h-6l-4.7-6.1L5.9 21h-3l7-8L2.4 3h6.2l4.2 5.6zm-1 16.2h1.7L7.3 4.7H5.5z"/></svg></a>
+  </div></div>
+<div><h4>Tests</h4><ul><li><a href="404.html">Blood Tests</a></li><li><a href="404.html">Health Packages</a></li><li><a href="404.html">Home Collection</a></li><li><a href="404.html">Wellness Packages</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="404.html">About us</a></li><li><a href="404.html">Blog</a></li><li><a href="404.html">Contact Us</a></li><li><a href="404.html">Patient Login</a></li></ul></div>
+<div><h4>Visit and call</h4><ul><li>Stackly Diagnostics, Omalur Main Road, Salem, Tamil Nadu 636007</li><li><a href="404.html">+91 98765 43210</a></li><li><a href="404.html">info@stackly.in</a></li><li><a href="404.html">Chat on WhatsApp</a></li></ul></div>
+<div class="sf-hrs"><h4>Opening hours</h4><ul><li>Mon-Sat <b>6:30 AM - 8 PM</b></li><li>Sunday <b>7 AM - 1 PM</b></li><li>Home visits <b>Daily</b></li></ul></div>
+</div>
+<div class="sf-bot"><span>&copy; 2026 <b>Stackly Diagnostics</b>. All rights reserved.</span><span class="sf-l"><a href="404.html">Privacy policy</a><a href="404.html">Terms</a></span><a href="404.html">Back to top &uarr;</a></div>
+<div class="sf-word" aria-hidden="true">Stackly</div>
+</div></footer>
+
+<script>
+// Burger menu
+document.querySelector(".burger").addEventListener("click",function(){var n=document.querySelector("nav"),o=n.classList.toggle("open");this.setAttribute("aria-expanded",o)});
+document.querySelectorAll("nav ul a").forEach(function(a){a.addEventListener("click",function(){document.querySelector("nav").classList.remove("open")})});
+
+// Live Blog Category Filter & Sorting
+(function(){
+ var catBtns = document.querySelectorAll(".cat-btn");
+ var cards = document.querySelectorAll(".b-card");
+ var feat = document.querySelector(".featured");
+ var sortSelect = document.querySelector(".sort-select");
+ var currentCat = "all";
+
+ function filterBlog(){
+  cards.forEach(function(card){
+   var tag = (card.querySelector(".b-tag") ? card.querySelector(".b-tag").textContent : "").toLowerCase();
+   var match = (currentCat === "all");
+   if(!match){
+    if(currentCat === "blood" && tag.indexOf("blood") !== -1) match = true;
+    else if(currentCat === "thyroid" && (tag.indexOf("thyroid") !== -1 || tag.indexOf("hormone") !== -1)) match = true;
+    else if(currentCat === "diabetes" && tag.indexOf("diabetes") !== -1) match = true;
+    else if(currentCat === "wellness" && tag.indexOf("wellness") !== -1) match = true;
+    else if(currentCat === "guide" && (tag.indexOf("guide") !== -1 || tag.indexOf("patient") !== -1)) match = true;
+    else if(currentCat === "home" && (tag.indexOf("home") !== -1 || tag.indexOf("collection") !== -1)) match = true;
+    else if(tag.indexOf(currentCat) !== -1) match = true;
+   }
+   card.style.display = match ? "" : "none";
+  });
+
+  if(feat){
+   var featBadge = (feat.querySelector(".feat-badge") ? feat.querySelector(".feat-badge").textContent : "").toLowerCase();
+   var featMatch = (currentCat === "all" || (currentCat === "blood" && featBadge.indexOf("blood") !== -1) || featBadge.indexOf(currentCat) !== -1);
+   feat.style.display = featMatch ? "" : "none";
+  }
+ }
+
+ catBtns.forEach(function(btn){
+  btn.addEventListener("click", function(e){
+   e.preventDefault();
+   catBtns.forEach(function(b){ b.classList.remove("active"); });
+   btn.classList.add("active");
+   currentCat = btn.id.replace("cat-", "").toLowerCase();
+   filterBlog();
+  });
+ });
+
+ if(sortSelect){
+  sortSelect.addEventListener("change", function(){
+   var grid = document.querySelector(".blog-grid");
+   if(!grid) return;
+   var arr = Array.from(grid.querySelectorAll(".b-card"));
+   var val = sortSelect.value.toLowerCase();
+   arr.sort(function(a, b){
+    if(val.indexOf("shortest") !== -1){
+     var rA = parseInt(a.querySelector(".b-read") ? a.querySelector(".b-read").textContent : "10", 10);
+     var rB = parseInt(b.querySelector(".b-read") ? b.querySelector(".b-read").textContent : "10", 10);
+     return rA - rB;
+    } else if(val.indexOf("popular") !== -1){
+     return b.textContent.length - a.textContent.length;
+    } else {
+     var dA = new Date(a.querySelector(".b-date") ? a.querySelector(".b-date").textContent : "Jan 1, 2026").getTime();
+     var dB = new Date(b.querySelector(".b-date") ? b.querySelector(".b-date").textContent : "Jan 1, 2026").getTime();
+     return dB - dA;
+    }
+   });
+   arr.forEach(function(c){ grid.appendChild(c); });
+  });
+ }
+})();
+</script>
+<script src="validation.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign In | Stackly Diagnostics Salem</title>
+<meta name="description" content="Access your patient portal, view test reports, and manage lab bookings with Stackly Diagnostics, Salem.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page">
+
+<header class="auth-header">
+ <a href="index.html" class="logo" aria-label="Stackly home"><img src="images/stackly logo.webp" alt="Stackly" class="stackly-logo-img"></a>
+ <a href="index.html" class="btn ghost" style="padding:8px 18px;font-size:13.5px">&larr; Back to Home</a>
+</header>
+
+<main class="auth-container">
+ <div class="auth-box">
+  <div class="auth-head">
+   <span class="badge" style="margin-bottom:8px"><b>Portal</b>Secure Access</span>
+   <h1>Sign In to Stackly</h1>
+   <p>View test results, track home sample collection, or manage clinic records.</p>
+  </div>
+
+  <form id="loginForm" class="auth-form" novalidate>
+   <div class="fg">
+    <label for="loginRole">Account Role *</label>
+    <select id="loginRole" required>
+     <option value="user" selected>Patient / Customer</option>
+     <option value="admin">Lab Staff / Administrator</option>
+    </select>
+   </div>
+
+   <div class="fg">
+    <label for="loginEmail">Email Address *</label>
+    <input type="email" id="loginEmail" required placeholder="yourname@gmail.com" autocomplete="email">
+   </div>
+
+   <div class="fg">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+     <label for="loginPassword">Password *</label>
+     <a href="404.html" style="font-size:12px;color:var(--green);font-weight:600;text-decoration:none">Forgot password?</a>
+    </div>
+    <input type="password" id="loginPassword" required placeholder="Min 8 characters" autocomplete="current-password">
+   </div>
+
+   <button type="submit" class="btn green" style="width:100%;padding:14px;border-radius:14px;font-size:15px;margin-top:6px">Sign In</button>
+
+   <div class="auth-demo-pill">
+    <span><b>Quick fill:</b></span>
+    <div>
+     <button type="button" onclick="fillCreds('user')">Patient Demo</button> |
+     <button type="button" onclick="fillCreds('admin')">Admin Demo</button>
+    </div>
+   </div>
+  </form>
+
+  <div class="auth-footer-text">
+   Don't have an account? <a href="signup.html">Create an Account</a>
+  </div>
+ </div>
+</main>
+
+<script>
+function fillCreds(role) {
+  var roleSelect = document.getElementById('loginRole');
+  var emailInput = document.getElementById('loginEmail');
+  var passInput = document.getElementById('loginPassword');
+  roleSelect.value = role;
+  if(role === 'admin') {
+    emailInput.value = 'admin@stackly.in';
+    passInput.value = 'AdminPass123!';
+  } else {
+    emailInput.value = 'suresh@example.com';
+    passInput.value = 'Password123!';
+  }
+}
+</script>
+<script src="validation.js"></script>
+</body>
+</html>
